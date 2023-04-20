@@ -1,10 +1,9 @@
 <script setup>
-  import HelloWorld from './components/HelloWorld.vue'
-  import TheWelcome from './components/TheWelcome.vue'
+  import Lists from './components/Lists/Lists.vue';
 </script>
 
 <template>
-  
+  <Lists />
 </template>
 
 <style scoped>

@@ -1,0 +1,14 @@
+.item-box{
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    border: 1px solid red;
+}
+.item-check{
+    position: relative;
+    width: auto;
+}
