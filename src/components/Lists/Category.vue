@@ -10,26 +10,37 @@
         class="category-title" 
         :style="{borderColor: propiedad.color}">
             <div class="title-text-box">
-                <!-- <span 
-                class="title-text" 
-                :style="{color: propiedad.color}">{{ propiedad.name }}</span> -->
                 <input 
                 type="text"
                 class="title-text"
                 :value="propiedad.name"
-                :style="{ borderColor: propiedad.color }"
+                :style="{ borderColor: propiedad.color, color: propiedad.color }"
                 @focusout="updateCatName($event.target.value)"
                 >
             </div>
             <div 
             class="title-img-box" 
             :style="{color: propiedad.color}">
-                <i 
+                <!-- <i 
                 class="title-img bi bi-pencil"
-                ></i>
-                <i 
-                class="title-img bi bi-plus-circle"
-                @click="addItem(propiedad.id)"></i>
+                ></i> -->
+                <div class="title-img-item">
+                    <input 
+                    type="color" 
+                    class="title-color"
+                    v-model="propiedad.color"
+                    @blur="updateCatColor(propiedad.color)">
+                </div>
+                <div class="title-img-item">
+                    <i
+                    class="title-img bi bi-plus-circle"
+                    @click="addItem(propiedad.id)"></i>
+                </div>
+                <div class="title-img-item">
+                    <i
+                    class="title-img bi bi-dash-circle"
+                    @click="removeCategory()"></i>
+                </div>
             </div>
         </div>
 
@@ -80,6 +91,14 @@
             },
             updateCatName(t){
                 this.propiedad.name = t
+            },
+            updateCatColor(newColor){
+                console.log(newColor)
+                this.propiedad.color = newColor
+                console.log(this.propiedad.color)
+            },
+            removeCategory(){
+                this.$emit('removeCategory', String(this.propiedad.id))
             }
         }
     }

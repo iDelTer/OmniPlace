@@ -24,7 +24,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
-    width: 80%;
+    width: 70%;
 }
 .title-text{
     text-align: center;
@@ -37,6 +37,24 @@
     border-bottom: 1px solid;
     outline: none;
 }
+
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 0;
+}
+input[type="color"]{
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    padding: 0px;
+    border: 0.5px solid white;
+}
+
+
 .title-img-box{
     padding-top: 10px;
     padding-right: 10px;
@@ -48,6 +66,14 @@
     align-content: center;
     width: auto;
     text-align: center;
+}
+.title-img-item{
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
 }
 .title-img{
     font-size: 18px;

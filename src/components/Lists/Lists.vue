@@ -19,6 +19,7 @@
 			v-for="category in categories"
 			:propiedad="category"
 			:propItems="items"
+            @removeCategory="removeCategory(category.id)"
 		/>
 	</div>
 </template>
@@ -55,7 +56,11 @@
                 }
                 console.log(this.categories)
                 this.categories.push(obj)
-			}
+			},
+            removeCategory(identifier){
+                let index = this.categories.findIndex(item => item.id === identifier)
+                this.categories.splice(index, 1)
+            }
 		},
 	}
 </script>
