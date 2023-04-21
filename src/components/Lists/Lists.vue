@@ -1,5 +1,5 @@
 <template>
-	<div class="list-box">
+	<div id="list-box">
         <Category 
         v-for="category in categories" 
         :propiedad="category"
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-    import Item from "./Item.vue";
 	import Category from "./Category.vue"
 
 	export default {
@@ -28,11 +27,15 @@
                     {id: 1, text: 'Texto 2', category: 0},
                     {id: 2, text: 'Texto 3', category: 1},
                     {id: 3, text: 'Texto 4', category: 1},
-                    {id: 4, text: 'Texto 5', category: 0}
+                    {id: 4, text: 'Texto 5', category: 0},
+                    {id: 5, text: 'Texto 6', category: 2},
+                    {id: 6, text: 'Texto 7', category: 3}
                 ],
                 categories: [
-                    {id: 0, name: 'Hogar', color: '#ffffff'},
-                    {id: 1, name: 'Ocio', color: '#e5e6e5'}
+                    {id: 0, name: 'Hogar', color: '#09ddf2'},
+                    {id: 1, name: 'Ocio', color: '#ee1cfa'},
+                    {id: 2, name: 'Trabajo', color: '#000000'},
+                    {id: 3, name: 'Estudios', color: '#ff0000'}
                 ]
             }
 		},

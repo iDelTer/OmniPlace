@@ -1,10 +1,31 @@
 <template>
-    <div class="item-box" :key="propiedades.id">
-        <div class="item-check">
-            <input type="checkbox" class="input-check">
-        </div>
-        <div class="item-text">{{ propiedades.text }}</div>
+  <div
+    class="item-box"
+    :key="propiedades.id"
+    :style="{ borderColor: catColor, color: catColor }"
+  >
+    <div class="item-check">
+        <input 
+            type="checkbox" 
+            class="input-check"
+            :style="{borderColor: catColor}"
+        />
     </div>
+    <div class="item-text">
+        <input 
+        type="text" 
+        :value="propiedades.text"
+        @focusout="updateText($event.target.value)"
+        :style="{ borderColor: catColor }"
+        class="input-text">
+    </div>
+    <div class="item-context">
+        <img 
+        src="../../../public/remove.png" 
+        class="context-img"
+        @click="remove()">
+    </div>
+  </div>
 </template>
 
 <script>
@@ -12,14 +33,25 @@
         props: {
             propiedades: {
                 type: Object,
-                required: true
-            }
+                required: true,
+            },
+            catColor: {
+                type: String,
+                required: true,
+            },
         },
         methods: {
-        }
-    }
+            updateText(text){
+                this.propiedades.text = text
+            },
+            remove(){
+                this.$emit('removeItem', this.propiedades.id)
+            }
+        },
+        emits: ['removeItem']
+    };
 </script>
 
 <style>
-    @import './item.css'
+    @import "./item.css";
 </style>

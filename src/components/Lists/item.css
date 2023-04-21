@@ -1,14 +1,50 @@
 .item-box{
     position: relative;
+    margin-bottom: 10px;
+    padding-block: 10px;
+    padding-inline: 20px;
     width: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: center;
-    border: 1px solid red;
+    border: 1px solid;
 }
 .item-check{
     position: relative;
     width: auto;
+    margin-right: 10px;
+}
+
+.item-text{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.input-text{
+    position: relative;
+    width: 100%;
+    border: 0px solid;
+}
+.input-text:focus {
+    border-bottom: 1px solid;
+    outline: none;
+}
+.item-context{
+    position: relative;
+    margin-left: 10px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: center;
+}
+.context-img{
+    width: 10px;
+    height: 10px;
 }
