@@ -89,7 +89,7 @@
                 this.propItems.splice(index, 1)
             },
             addItem(categoryValue){
-                this.propItems.push({id: this.createId(), text: 'Edit this text', category: categoryValue})
+                this.propItems.push({id: this.createId(), text: 'Edit this text', category: categoryValue, isChecked: false})
             },
             createId(){
                 let id = gId()

@@ -9,15 +9,23 @@
             type="checkbox" 
             class="input-check"
             :style="{borderColor: catColor}"
+            v-model="propiedades.isChecked"
+            @click="changeChecked()"
         />
     </div>
     <div class="item-text">
-        <input 
-        type="text" 
-        :value="propiedades.text"
-        @focusout="updateText($event.target.value)"
-        :style="{ borderColor: catColor }"
-        class="input-text">
+        <div v-if="propiedades.isChecked">
+            <span class="italic">{{ propiedades.text }}</span>
+        </div>
+        <div v-else>
+            <input 
+            type="text" 
+            :value="propiedades.text"
+            @focusout="updateText($event.target.value)"
+            :style="{ borderColor: catColor, color: catColor }"
+            class="input-text">
+        </div>
+        
     </div>
     <div class="item-context">
         <i 
@@ -45,6 +53,9 @@
             },
             remove(){
                 this.$emit('removeItem', this.propiedades.id)
+            },
+            changeChecked(){
+                this.propiedades.isChecked = !this.propiedades.isChecked
             }
         },
         emits: ['removeItem']
