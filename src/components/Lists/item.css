@@ -29,6 +29,7 @@
     position: relative;
     width: 100%;
     border: 0px solid;
+    background-color: inherit;
 }
 .input-text:focus {
     border-bottom: 1px solid;
@@ -43,8 +44,12 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     align-content: center;
+    background-color: transparent;
 }
-.context-img{
+/*.context-img{
     width: 10px;
     height: 10px;
+}*/
+.context-img{
+    font-size: 16px;
 }

@@ -1,5 +1,6 @@
 <script setup>
-    import Item from './Item.vue';
+    import Item from './Item.vue'
+    import { uuid4 as gId }  from 'uuid4'
 </script>
 
 <template>
@@ -9,16 +10,26 @@
         class="category-title" 
         :style="{borderColor: propiedad.color}">
             <div class="title-text-box">
-                <span 
+                <!-- <span 
                 class="title-text" 
-                :style="{color: propiedad.color}">{{ propiedad.name }}</span>
-            </div>
-            <div class="title-img-box">
-                <img 
-                src="../../../public/add.png" 
-                class="title-img"
-                @click="addItem(propiedad.id)"
+                :style="{color: propiedad.color}">{{ propiedad.name }}</span> -->
+                <input 
+                type="text"
+                class="title-text"
+                :value="propiedad.name"
+                :style="{ borderColor: propiedad.color }"
+                @focusout="updateCatName($event.target.value)"
                 >
+            </div>
+            <div 
+            class="title-img-box" 
+            :style="{color: propiedad.color}">
+                <i 
+                class="title-img bi bi-pencil"
+                ></i>
+                <i 
+                class="title-img bi bi-plus-circle"
+                @click="addItem(propiedad.id)"></i>
             </div>
         </div>
 
@@ -60,7 +71,15 @@
                 this.propItems.splice(index, 1)
             },
             addItem(categoryValue){
-                this.propItems.push({id: Math.floor(Math.random() * 1000000 + 1000), text: 'Edit this text', category: categoryValue})
+                this.propItems.push({id: this.createId(), text: 'Edit this text', category: categoryValue})
+            },
+            createId(){
+                let id = gId()
+                gId.valid(id)
+                return id
+            },
+            updateCatName(t){
+                this.propiedad.name = t
             }
         }
     }

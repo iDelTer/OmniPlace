@@ -20,10 +20,9 @@
         class="input-text">
     </div>
     <div class="item-context">
-        <img 
-        src="../../../public/remove.png" 
-        class="context-img"
-        @click="remove()">
+        <i 
+        class="context-img bi bi-dash-circle" 
+        @click="remove()"></i>
     </div>
   </div>
 </template>

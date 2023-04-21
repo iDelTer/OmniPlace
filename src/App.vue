@@ -1,9 +1,11 @@
 <script setup>
-  import Lists from './components/Lists/Lists.vue';
+	import Lists from "./components/Lists/Lists.vue"
+  import Navbar from './components/Navbar/Navbar.vue'
 </script>
 
 <template>
-  <Lists />
+  <Navbar />
+	<Lists />
 </template>
 
 <style scoped>
