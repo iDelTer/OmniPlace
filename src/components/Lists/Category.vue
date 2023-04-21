@@ -4,7 +4,12 @@
 </script>
 
 <template>
-    <div :key="propiedad.id" class="category-box">
+    <div 
+    :key="propiedad.id" 
+    class="category-box"
+    @dragover.prevent 
+    @drop="dropHandler($event)"
+    >
 
         <div 
         class="category-title" 
@@ -51,6 +56,8 @@
             :propiedades="item"
             :catColor="String(propiedad.color)"
             @removeItem="removeItem(item.id)"
+            :draggable="true"
+            @dragstart="dragStartHandler(item, $event)"
             />
         </div>
 
@@ -99,6 +106,14 @@
             },
             removeCategory(){
                 this.$emit('removeCategory', String(this.propiedad.id))
+            },
+            dragStartHandler(item, event) {
+                event.dataTransfer.setData("item", JSON.stringify(item));
+            },
+            dropHandler(event) {
+                const item = JSON.parse(event.dataTransfer.getData("item"));
+                const index = this.propItems.findIndex(i => i.id === item.id);
+                this.propItems[index].category = this.propiedad.id
             }
         }
     }
