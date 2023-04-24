@@ -79,13 +79,17 @@ body {
 :root{
     /* Light Mode */
     --light-background-color: whitesmoke;
+    --light-antibackground-color: rgb(78, 78, 78);
     --light-text-color: black;
+    --light-antitext-color: rgb(236, 236, 236);
     --light-navbar-background-color: #b6b6b6;
     --light-list-menu-background-color: #e0e0e0;
 
     /* Light mode */
     --dark-background-color: rgb(78, 78, 78);
+    --dark-antibackground-color: whitesmoke;
     --dark-text-color: rgb(236, 236, 236);
+    --dark-antitext-color: black;
     --dark-navbar-background-color: #3a3a3a;
     --dark-list-menu-background-color: #797979;
 }
@@ -96,6 +100,8 @@ body {
   --text-color: var(--light-text-color);
   --navbar-background-color: var(--light-navbar-background-color);
   --list-menu-background-color: var(--light-list-menu-background-color);
+  --antibackground-color: var(--light-antibackground-color);
+  --antitext-color: var(--light-antitext-color);
 }
 
 /* Dark Theme */
@@ -105,6 +111,8 @@ body {
     --text-color: var(--dark-text-color);
     --navbar-background-color: var(--dark-navbar-background-color);
     --list-menu-background-color: var(--dark-list-menu-background-color);
+    --antibackground-color: var(--dark-antibackground-color);
+    --antitext-color: var(--dark-antitext-color);
   }
 }
 

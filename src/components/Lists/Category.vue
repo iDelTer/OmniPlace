@@ -29,9 +29,6 @@
             <div 
             class="title-img-box" 
             :style="{color: propiedad.color}">
-                <!-- <i 
-                class="title-img bi bi-pencil"
-                ></i> -->
                 <div class="title-img-item">
                     <input 
                     type="color" 
@@ -144,7 +141,7 @@
         },
         watch: {
             propItems: {
-                handler: (newItems, oldItems) => {
+                handler: (newItems) => {
                     localStorage.setItem("items", JSON.stringify(newItems))
                 },
                 deep: true
