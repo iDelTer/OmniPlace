@@ -49,6 +49,18 @@
                     class="title-img bi bi-dash-circle"
                     @click="removeCategory"></i>
                 </div>
+                <div class="title-img-item">
+				    <i 
+                    class="title-img bi bi-pin-angle"
+                    @click="updateCatPin()"
+                    v-if="!propiedad.isPinned"
+                    ></i>
+                    <i 
+                    class="title-img bi bi-pin-angle-fill"
+                    @click="updateCatPin()"
+                    v-else
+                    ></i>
+                </div>
             </div>
         </div>
 
@@ -107,6 +119,9 @@
             updateCatColor(newColor){
                 this.propiedad.color = newColor
             },
+            updateCatPin(){
+                this.propiedad.isPinned = !this.propiedad.isPinned
+            },
             removeCategory(){
                 this.$emit('removeCategory', String(this.propiedad.id))
             },
@@ -121,9 +136,9 @@
                 this.$emit('draggingFinished')
             },
             keyManagement(eKey, eTxt){
-                if(event.key === "Enter"){
+                if(eKey.key === "Enter"){
                     this.updateCatName(eTxt)
-                    event.target.blur()
+                    eKey.target.blur()
                 }
             }
         },

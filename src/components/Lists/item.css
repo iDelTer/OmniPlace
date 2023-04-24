@@ -42,7 +42,7 @@
 }
 .input-text{
     position: relative;
-    width: 100%;
+    width: 275px;
     font-size: 14px;
     border: 0px solid;
     background-color: inherit;
@@ -57,7 +57,7 @@
 .item-context{
     position: relative;
     margin-left: 10px;
-    width: auto;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

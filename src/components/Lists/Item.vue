@@ -60,9 +60,9 @@
                 this.propiedades.isChecked = !this.propiedades.isChecked
             },
             keyManagement(eKey, eTxt){
-                if(event.key === "Enter"){
+                if(eKey.key === "Enter"){
                     this.updateText(eTxt)
-                    event.target.blur()
+                    eKey.target.blur()
                 }
             }
             
