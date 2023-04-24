@@ -36,12 +36,7 @@
 		data() {
 			return {
 				items: [],
-				categories: [
-					{ id: this.createId(), name: "Hogar", color: "#09ddf2", isDragging: false },
-					{ id: this.createId(), name: "Ocio", color: "#ee1cfa", isDragging: false },
-					{ id: this.createId(), name: "Trabajo", color: "#000000", isDragging: false },
-					{ id: this.createId(), name: "Estudios", color: "#ff0000", isDragging: false },
-				],
+				categories: [],
 			}
 		},
 		methods: {
@@ -74,8 +69,36 @@
 					c.isDragging = false
 				})
 				document.body.style.cursor = "auto"
+			},
+			loadCategoriesFromLocal(){
+				const categoriesFromLocal = localStorage.getItem("categories");
+				if (categoriesFromLocal) {
+					this.categories = JSON.parse(categoriesFromLocal);
+				}
+			},
+			loadItemsFromLocal(){
+				const ItemsFromLocal = localStorage.getItem("items");
+				if (ItemsFromLocal) {
+					this.items = JSON.parse(ItemsFromLocal);
+				}
 			}
 		},
+		watch: {
+			categories: {
+				// handler: (newCategories, oldCategories) => {
+				// 	localStorage.setItem("categories", JSON.stringify(newCategories))
+				// },
+				// deep: true
+				handler(newVal) {
+					const watch = newVal.map(({ id, name, color }) => ({ id, name, color }));
+					localStorage.setItem("categories", JSON.stringify(newVal))
+				}
+			}
+		},
+		mounted() {
+			this.loadCategoriesFromLocal();
+			this.loadItemsFromLocal();
+		}
 	}
 </script>
 

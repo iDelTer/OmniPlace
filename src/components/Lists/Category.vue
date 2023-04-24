@@ -126,6 +126,14 @@
                     event.target.blur()
                 }
             }
+        },
+        watch: {
+            propItems: {
+                handler: (newItems, oldItems) => {
+                    localStorage.setItem("items", JSON.stringify(newItems))
+                },
+                deep: true
+            }            
         }
     }
 </script>

@@ -24,6 +24,14 @@
     margin-right: 10px;
 }
 
+.item-check{
+    position: relative;
+    padding-top: 1px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
 .item-text{
     position: relative;
     width: 100%;
@@ -35,6 +43,7 @@
 .input-text{
     position: relative;
     width: 100%;
+    font-size: 14px;
     border: 0px solid;
     background-color: inherit;
 }

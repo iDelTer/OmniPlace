@@ -82,7 +82,7 @@ input[type="color"]{
 
 .items-container{
     position: relative;
-    min-height: 100px;
+    min-height: 60px;
     width: auto;
     height: auto;
 }
