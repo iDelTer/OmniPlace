@@ -20,6 +20,8 @@
 			:propiedad="category"
 			:propItems="items"
             @removeCategory="removeCategory(category.id)"
+			@draggingStarted="draggingStarted()"
+			@draggingFinished="draggingFinished()"
 		/>
 	</div>
 </template>
@@ -35,10 +37,10 @@
 			return {
 				items: [],
 				categories: [
-					{ id: this.createId(), name: "Hogar", color: "#09ddf2" },
-					{ id: this.createId(), name: "Ocio", color: "#ee1cfa" },
-					{ id: this.createId(), name: "Trabajo", color: "#000000" },
-					{ id: this.createId(), name: "Estudios", color: "#ff0000" },
+					{ id: this.createId(), name: "Hogar", color: "#09ddf2", isDragging: false },
+					{ id: this.createId(), name: "Ocio", color: "#ee1cfa", isDragging: false },
+					{ id: this.createId(), name: "Trabajo", color: "#000000", isDragging: false },
+					{ id: this.createId(), name: "Estudios", color: "#ff0000", isDragging: false },
 				],
 			}
 		},
@@ -53,14 +55,26 @@
                     id: this.createId(),
 				    name: "Edit Name",
 				    color: "#000000",
+					isDragging: false
                 }
-                console.log(this.categories)
                 this.categories.push(obj)
 			},
             removeCategory(identifier){
                 let index = this.categories.findIndex(item => item.id === identifier)
                 this.categories.splice(index, 1)
-            }
+            },
+			draggingStarted(){
+				this.categories.map(c => {
+					c.isDragging = true
+				})
+				document.body.style.cursor = "dragging"
+			},
+			draggingFinished(){
+				this.categories.map(c => {
+					c.isDragging = false
+				})
+				document.body.style.cursor = "auto"
+			}
 		},
 	}
 </script>

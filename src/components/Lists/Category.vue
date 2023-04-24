@@ -7,8 +7,10 @@
     <div 
     :key="propiedad.id" 
     class="category-box"
+    :style="{borderColor: propiedad.color}"
     @dragover.prevent 
     @drop="dropHandler($event)"
+    :class="{'dragging': propiedad.isDragging}"
     >
 
         <div 
@@ -21,6 +23,7 @@
                 :value="propiedad.name"
                 :style="{ borderColor: propiedad.color, color: propiedad.color }"
                 @focusout="updateCatName($event.target.value)"
+                @keypress="keyManagement($event, $event.target.value)"
                 >
             </div>
             <div 
@@ -44,21 +47,23 @@
                 <div class="title-img-item">
                     <i
                     class="title-img bi bi-dash-circle"
-                    @click="removeCategory()"></i>
+                    @click="removeCategory"></i>
                 </div>
             </div>
         </div>
 
-        <div 
-        class="item" v-for="item in propItems" >
-            <Item
-            v-if="item.category === propiedad.id"
-            :propiedades="item"
-            :catColor="String(propiedad.color)"
-            @removeItem="removeItem(item.id)"
-            :draggable="true"
-            @dragstart="dragStartHandler(item, $event)"
-            />
+        <div class="items-container">
+            <div 
+            class="item" v-for="item in propItems" >
+                <Item
+                v-if="item.category === propiedad.id"
+                :propiedades="item"
+                :catColor="String(propiedad.color)"
+                @removeItem="removeItem(item.id)"
+                :draggable="true"
+                @dragstart="dragStartHandler(item, $event)"
+                />
+            </div>
         </div>
 
     </div>
@@ -100,20 +105,26 @@
                 this.propiedad.name = t
             },
             updateCatColor(newColor){
-                console.log(newColor)
                 this.propiedad.color = newColor
-                console.log(this.propiedad.color)
             },
             removeCategory(){
                 this.$emit('removeCategory', String(this.propiedad.id))
             },
             dragStartHandler(item, event) {
                 event.dataTransfer.setData("item", JSON.stringify(item));
+                this.$emit('draggingStarted')
             },
             dropHandler(event) {
                 const item = JSON.parse(event.dataTransfer.getData("item"));
                 const index = this.propItems.findIndex(i => i.id === item.id);
                 this.propItems[index].category = this.propiedad.id
+                this.$emit('draggingFinished')
+            },
+            keyManagement(eKey, eTxt){
+                if(event.key === "Enter"){
+                    this.updateCatName(eTxt)
+                    event.target.blur()
+                }
             }
         }
     }

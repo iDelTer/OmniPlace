@@ -22,6 +22,8 @@
             type="text" 
             :value="propiedades.text"
             @focusout="updateText($event.target.value)"
+            @keypress="keyManagement($event, $event.target.value)"
+            @keydown.tab="keyManagement($event, $event.target.value)"
             :style="{ borderColor: catColor, color: catColor }"
             class="input-text">
         </div>
@@ -56,7 +58,14 @@
             },
             changeChecked(){
                 this.propiedades.isChecked = !this.propiedades.isChecked
+            },
+            keyManagement(eKey, eTxt){
+                if(event.key === "Enter"){
+                    this.updateText(eTxt)
+                    event.target.blur()
+                }
             }
+            
         },
         emits: ['removeItem']
     };

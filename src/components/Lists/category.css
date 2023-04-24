@@ -4,6 +4,8 @@
     max-width: 375px;
     text-align: center;
     margin-right: 50px;
+    margin-bottom: 50px;
+    border-radius: 5px;
 }
 .category-title{
     position: relative;
@@ -54,9 +56,7 @@ input[type="color"]{
     border: 0.5px solid white;
 }
 
-
 .title-img-box{
-    padding-top: 10px;
     padding-right: 10px;
     position: relative;
     width: auto;
@@ -79,6 +79,13 @@ input[type="color"]{
     font-size: 18px;
     margin-left: 10px;
 }
+
+.items-container{
+    position: relative;
+    min-height: 100px;
+    width: auto;
+    height: auto;
+}
 .item{
     position: relative;
     width: auto;
@@ -87,4 +94,12 @@ input[type="color"]{
     flex-direction: column;
     align-content: center;
     justify-content: center;
+}
+
+/* Events */
+.dragging{
+    border: 1px solid;
+}
+input[type="color"]:hover, .title-img:hover{
+    cursor: pointer;
 }

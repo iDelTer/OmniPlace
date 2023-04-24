@@ -10,6 +10,13 @@
     justify-content: flex-start;
     align-content: center;
     border: 1px solid;
+    border-radius: 5px;
+}
+.item-box:hover{
+    cursor: grab;
+}
+.item-box:active{
+    cursor: grabbing;
 }
 .item-check{
     position: relative;
@@ -35,6 +42,9 @@
     border-bottom: 1px solid;
     outline: none;
 }
+.input-text:hover{
+    cursor: text;
+}
 .item-context{
     position: relative;
     margin-left: 10px;
@@ -52,6 +62,9 @@
 }*/
 .context-img{
     font-size: 16px;
+}
+.context-img:hover{
+    cursor: pointer;
 }
 
 .italic{
