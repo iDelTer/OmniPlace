@@ -61,9 +61,37 @@
             </div>
         </div>
 
-        <div class="items-container">
+        <div class="items-container" v-if="checkedOptions.showCheckeds">
             <div 
             class="item" v-for="item in propItems" >
+                <Item
+                v-if="item.category === propiedad.id && item.isChecked"
+                :propiedades="item"
+                :catColor="String(propiedad.color)"
+                @removeItem="removeItem(item.id)"
+                :draggable="true"
+                @dragstart="dragStartHandler(item, $event)"
+                />
+            </div>
+        </div>
+
+        <div class="items-container" v-else-if="checkedOptions.hideCheckeds">
+            <div 
+            class="item" v-for="item in propItems" >
+                <Item
+                v-if="item.category === propiedad.id && !item.isChecked"
+                :propiedades="item"
+                :catColor="String(propiedad.color)"
+                @removeItem="removeItem(item.id)"
+                :draggable="true"
+                @dragstart="dragStartHandler(item, $event)"
+                />
+            </div>
+        </div>
+
+        <div class="items-container" v-else>
+            <div 
+            class="item" v-for="item in propItems">
                 <Item
                 v-if="item.category === propiedad.id"
                 :propiedades="item"
@@ -90,6 +118,10 @@
             },
             propItems: {
                 type: Array,
+                required: true
+            },
+            checkedOptions: {
+                type: Object,
                 required: true
             }
         },

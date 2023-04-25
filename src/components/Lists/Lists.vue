@@ -10,7 +10,7 @@ import { uuid4 as gId } from "uuid4";
 				<i class="title-img bi bi-plus-circle"></i>
 			</div>
 			<div class="menu-text">
-				<span>Category</span>
+				<span>New Category</span>
 			</div>
 		</div>
 		<div class="menu-item" @click="togglePinned()">
@@ -21,12 +21,29 @@ import { uuid4 as gId } from "uuid4";
 				<span>Toggle Pins</span>
 			</div>
 		</div>
+		<div class="menu-item" @click="onlyCheckeds()">
+			<div class="menu-icon">
+				<i class="title-img bi bi-check-square-fill"></i>
+			</div>
+			<div class="menu-text">
+				<span>Only Checkeds</span>
+			</div>
+		</div>
+		<div class="menu-item" @click="hideCheckeds()">
+			<div class="menu-icon">
+				<i class="title-img bi bi-check-square"></i>
+			</div>
+			<div class="menu-text">
+				<span>Hide Checkeds</span>
+			</div>
+		</div>
 	</div>
 
 	<div id="list-box" :style="{flexDirection: 'column'}" v-if="showPinned">
 		<div id="pinned-box">
 			<div class="categories-title">
-				<p class="list-box-title">PINNED LISTS</p>
+				<!-- <p class="list-box-title">PINNED LISTS</p> -->
+				<p class="list-box-title"><i class="bi bi-pin-angle-fill"></i></p>
 			</div>
 
 			<div class="categories-box">
@@ -36,6 +53,7 @@ import { uuid4 as gId } from "uuid4";
 						v-if="category.isPinned"
 						:propiedad="category"
 						:propItems="items"
+						:checkedOptions="checkedOptions"
 						@removeCategory="removeCategory(category.id)"
 						@draggingStarted="draggingStarted()"
 						@draggingFinished="draggingFinished()"
@@ -46,7 +64,8 @@ import { uuid4 as gId } from "uuid4";
 
 		<div id="notpinned-box">
 			<div class="categories-title">
-				<p class="list-box-title">NO PINNED LISTS</p>
+				<!-- <p class="list-box-title">NO PINNED LISTS</p> -->
+				<p class="list-box-title"><i class="bi bi-pin-angle"></i></p>
 			</div>
 			<div class="categories-box">
 				<template v-for="category in categories">
@@ -55,6 +74,7 @@ import { uuid4 as gId } from "uuid4";
 						v-if="!category.isPinned"
 						:propiedad="category"
 						:propItems="items"
+						:checkedOptions="checkedOptions"
 						@removeCategory="removeCategory(category.id)"
 						@draggingStarted="draggingStarted()"
 						@draggingFinished="draggingFinished()"
@@ -70,6 +90,7 @@ import { uuid4 as gId } from "uuid4";
 			v-for="category in categories"
 			:propiedad="category"
 			:propItems="items"
+			:checkedOptions="checkedOptions"
 			@removeCategory="removeCategory(category.id)"
 			@draggingStarted="draggingStarted()"
 			@draggingFinished="draggingFinished()"
@@ -90,6 +111,10 @@ export default {
 			items: [],
 			categories: [],
 			showPinned: false,
+			checkedOptions: {
+				showCheckeds: false,
+				hideCheckeds: false
+			},
 			category: {
 				id: "",
 				name: "",
@@ -123,6 +148,14 @@ export default {
 		},
 		togglePinned() {
 			this.showPinned = !this.showPinned;
+		},
+		onlyCheckeds(){
+			this.checkedOptions.showCheckeds = !this.checkedOptions.showCheckeds
+			this.checkedOptions.hideCheckeds = this.checkedOptions.hideCheckeds = false
+		},
+		hideCheckeds(){
+			this.checkedOptions.hideCheckeds = !this.checkedOptions.hideCheckeds
+			this.checkedOptions.showCheckeds = this.checkedOptions.showCheckeds = false
 		},
 		draggingStarted() {
 			this.categories.map((c) => {
@@ -160,15 +193,19 @@ export default {
 			});
 		}
 	},
+	emits: [
+		
+	],
 	watch: {
 		categories: {
 			deep: true,
 			handler: (newVal) => {
-				const watch = newVal.map(({ id, name, color, isPinned }) => ({
+				const watch = newVal.map(({ id, name, color, isPinned, showCheckeds }) => ({
 					id,
 					name,
 					color,
-					isPinned
+					isPinned,
+					showCheckeds
 				}));
 				localStorage.setItem("categories", JSON.stringify(watch));
 			}

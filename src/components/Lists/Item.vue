@@ -8,14 +8,13 @@
         <input 
             type="checkbox" 
             class="input-check"
-            :style="{borderColor: catColor}"
             v-model="propiedades.isChecked"
             @click="changeChecked()"
         />
     </div>
     <div class="item-text">
         <div v-if="propiedades.isChecked">
-            <span class="italic">{{ propiedades.text }}</span>
+            <span class="checkedStyle">{{ propiedades.text }}</span>
         </div>
         <div v-else>
             <input 
