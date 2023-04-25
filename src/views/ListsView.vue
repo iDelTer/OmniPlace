@@ -168,13 +168,13 @@ export default {
 			});
 		},
 		loadCategoriesFromLocal() {
-			const categoriesFromLocal = localStorage.getItem("categories");
+			const categoriesFromLocal = localStorage.getItem("lists-categories");
 			if (categoriesFromLocal) {
 				this.categories = JSON.parse(categoriesFromLocal);
 			}
 		},
 		loadItemsFromLocal() {
-			const ItemsFromLocal = localStorage.getItem("items");
+			const ItemsFromLocal = localStorage.getItem("lists-items");
 			if (ItemsFromLocal) {
 				this.items = JSON.parse(ItemsFromLocal);
 			}
@@ -207,7 +207,7 @@ export default {
 					isPinned,
 					showCheckeds
 				}));
-				localStorage.setItem("categories", JSON.stringify(watch));
+				localStorage.setItem("lists-categories", JSON.stringify(watch));
 			}
 		}
 	},

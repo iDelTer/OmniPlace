@@ -174,7 +174,7 @@
         watch: {
             propItems: {
                 handler: (newItems) => {
-                    localStorage.setItem("items", JSON.stringify(newItems))
+                    localStorage.setItem("lists-items", JSON.stringify(newItems))
                 },
                 deep: true
             }            

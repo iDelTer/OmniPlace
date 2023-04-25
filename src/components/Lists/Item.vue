@@ -70,6 +70,6 @@
     };
 </script>
 
-<style>
+<style scoped>
     @import "./item.css";
 </style>

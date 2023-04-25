@@ -42,7 +42,6 @@ import { uuid4 as gId } from "uuid4";
 	<div id="list-box" :style="{flexDirection: 'column'}" v-if="showPinned">
 		<div id="pinned-box">
 			<div class="categories-title">
-				<!-- <p class="list-box-title">PINNED LISTS</p> -->
 				<p class="list-box-title"><i class="bi bi-pin-angle-fill"></i></p>
 			</div>
 
@@ -64,7 +63,6 @@ import { uuid4 as gId } from "uuid4";
 
 		<div id="notpinned-box">
 			<div class="categories-title">
-				<!-- <p class="list-box-title">NO PINNED LISTS</p> -->
 				<p class="list-box-title"><i class="bi bi-pin-angle"></i></p>
 			</div>
 			<div class="categories-box">

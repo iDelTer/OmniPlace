@@ -9,6 +9,7 @@
     --light-antitext-color: rgb(236, 236, 236);
     --light-navbar-background-color: #b6b6b6;
     --light-list-menu-background-color: #e0e0e0;
+    --light-extreme: white;
 
     /* Dark mode */
     --dark-background-color: rgb(78, 78, 78);
@@ -17,6 +18,7 @@
     --dark-antitext-color: black;
     --dark-navbar-background-color: #3a3a3a;
     --dark-list-menu-background-color: #797979;
+    --dark-extreme: black;
 }
 
 /* Theme default */
@@ -27,6 +29,8 @@
   --list-menu-background-color: var(--light-list-menu-background-color);
   --antibackground-color: var(--light-antibackground-color);
   --antitext-color: var(--light-antitext-color);
+  --extreme: var(--light-extreme);
+  --antiextreme: var(--dark-extreme);
 }
 
 /* Dark Theme */
@@ -38,6 +42,9 @@
     --list-menu-background-color: var(--dark-list-menu-background-color);
     --antibackground-color: var(--dark-antibackground-color);
     --antitext-color: var(--dark-antitext-color);
+    --extreme: var(--dark-extreme);
+    --antiextreme: var(--light-extreme);
+
   }
 }
 
