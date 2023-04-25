@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "bootstrap-icons": "^1.10.4",
+    "pinia": "^2.0.35",
     "uuid4": "^2.0.3",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
