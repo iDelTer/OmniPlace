@@ -15,6 +15,15 @@
 			</div>
         </div>
 
+        <div class="menu-item" @click="addCategory()">
+			<div class="menu-icon">
+				<i class="title-img bi bi-plus-circle"></i>
+			</div>
+			<div class="menu-text">
+				<span>New Category</span>
+			</div>
+        </div>
+
         <div class="menu-item" @click="togglePinned()">
 			<div class="menu-icon">
 				<i class="title-img bi bi-pin-angle"></i>
@@ -47,6 +56,7 @@
                 :key="note.id"
                 v-if="note.isPinned"
                 :properties="note"
+                :categories="categories"
                 @removeNote="removeNote(note.id)"
                 @openModal="openModal(note.id)"
             />
@@ -63,6 +73,7 @@
                 :key="note.id"
                 v-if="!note.isPinned"
                 :properties="note"
+                :categories="categories"
                 @removeNote="removeNote(note.id)"
                 @openModal="openModal(note.id)"
             />
@@ -74,21 +85,18 @@
         <Note
             v-for="note in notes"
             :properties="note"
+            :categories="categories"
             @removeNote="removeNote(note.id)"
             @openModal="openModal(note.id)"
         />
 	</div>
 
-    <div class="modal" v-if="options.showModal">
-        <div class="modal-background"></div>
-        <div class="modal-content"></div>
-        <!-- 
-            Ambos divs van a estar en absoluto, en caso de colisión, modal-content tiene z-index mayor
-            He creado dos divs para que cuando le des fuera del contenido se cierre el modal, que ese fuera va a ser modal-background
-            Modal-content va a tener unos 800 de width y 80% de height
-            Modal background va a tener 100% de width y height
-        -->
-    </div>
+    <Note_Modal
+        v-if="options.modal.showModal"
+        :properties="getNote(options.modal.noteId)"
+        :categories="categories"
+        @closeModal="closeModal()"
+    />
 		<!-- 
             Al editar ->
 
@@ -109,6 +117,7 @@
 
 <script>
     import Note from "../components/Notes/Note.vue"
+    import Note_Modal from "../components/Modals/Note_Modal.vue";
 
 	export default {
         components: {
@@ -119,9 +128,16 @@
                 options: {
                     showPinned: true,
                     onlyPinned: false,
-                    showModal: true
+                    modal: {
+                        showModal: false,
+                        noteId: ''
+                    }
                 },
-                categories: [],
+                categories: [
+                    {id: this.createId(), name: 'Nombresito', color: '#ffffff'},
+                    {id: this.createId(), name: 'Nombresita', color: '#000000'},
+                    {id: this.createId(), name: 'El nombre', color: '#e3e4e5'}
+                ],
                 notes: [],
                 category: {
                     id: '',
@@ -163,6 +179,19 @@
                 }
                 this.notes.push(obj)
             },
+            addCategory(){
+                // Crea una nueva categoría
+                // Abre una modal que muestra todas las categorías
+                let obj = {
+                    id: this.createId(),
+                    title: 'New note',
+                    content: 'Start writing this note!',
+                    categories: [],
+                    isPinned: false,
+                    showContext: false
+                }
+                this.categories.push(obj)
+            },
             removeCategory(identifier){
                 let index = this.categories.findIndex(
                     (item) => item.id === identifier
@@ -183,7 +212,11 @@
                 this.options.showPinned = !this.options.onlyPinned
             },
             openModal(identifier){
-                // Abre el modal y muestra la información de la nota
+                this.options.modal.noteId = identifier
+                this.options.modal.showModal = true
+            },
+            closeModal(){
+                this.options.modal.showModal = false
             },
             loadCategoriesFromLocal() {
                 const categoriesFromLocal = localStorage.getItem("notes-categories");
@@ -191,12 +224,18 @@
                     this.categories = JSON.parse(categoriesFromLocal);
                 }
             },
-            loadItemsFromLocal() {
-                const ItemsFromLocal = localStorage.getItem("notes-note");
-                if (ItemsFromLocal) {
-                    this.items = JSON.parse(ItemsFromLocal);
+            loadNotesFromLocal() {
+                const NotesFromLocal = localStorage.getItem("notes-note");
+                if (NotesFromLocal) {
+                    this.notes = JSON.parse(NotesFromLocal);
                 }
             },
+            getNote(identifier){
+                let index = this.notes.findIndex(
+                    (item) => item.id === identifier
+                );
+                return this.notes[index]
+            }
         },
         watch: {
             categories: {

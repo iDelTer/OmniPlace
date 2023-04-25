@@ -78,9 +78,21 @@
 
 .note-categories{
     position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
     overflow-x: auto;
     width: 100%;
     padding-block: 5px;
+}
+.note-category{
+    margin-right: 5px;
+    padding-block: 2px;
+    padding-inline: 10px;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    font-weight: bold;
 }
 
 

@@ -33,12 +33,13 @@
                 class="note-category" 
                 v-if="properties.categories.length > 0" 
                 v-for="cat in properties.categories"
+                :style="{'color': getCategoryColor(cat), 'borderColor': getCategoryColor(cat)}"
                 >
-                <span class="category-text">{{ cat }}</span>
+                <span class="category-text">{{ getCategoryName(cat) }}</span>
             </div>
         </div>
 
-        <div class="note-context">
+        <div class="note-context" v-if="properties.showContext" @mouseleave="toggleContext()">
             <div class="context-item" @click="removeNote(properties.id)">
                 <i class="context-icon bi bi-dash-circle"></i>
                 <span class="context-text">Remove</span>
@@ -60,6 +61,10 @@
             properties: {
                 type: Object,
                 required: true
+            },
+            categories: {
+                type: Array,
+                required: true
             }
         },
         methods: {
@@ -71,9 +76,26 @@
             },
             removeNote(identifier){
                 this.$emit('removeNote', identifier)
+                this.toggleContext()
             },
             openModal(identifier){
                 this.$emit('openModal', identifier)
+                this.toggleContext()
+            },
+            getCategoryName(identifier){
+                for (let i = 0; i < this.categories.length; i++) {
+                    if (this.categories[i].id === identifier) {
+                        return this.categories[i].name
+                    }
+                }
+            },
+            getCategoryColor(identifier){
+                for (let i = 0; i < this.categories.length; i++) {
+                    if (this.categories[i].id === identifier) {
+                        return this.categories[i].color
+                    }
+                }
+                return ''
             }
         },
         emits: ['removeNote', 'openModal']
