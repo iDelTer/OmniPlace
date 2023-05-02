@@ -1,0 +1,49 @@
+.modal-header{
+    position: relative;
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: grow;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    color: var(--antitext-color);
+    font-weight: bold;
+}
+.modal-title{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 90%;
+    font-size: 32px;
+}
+.modal-menu{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    width: auto;
+    font-size: 24px;
+}
+.categories-box{
+    position: relative;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.category-box{
+    position: relative;
+    width: 100%;
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: row;
+}
+.category-box input{
+    margin-right: 0.5rem;
+}

@@ -1,13 +1,10 @@
-<script setup>
-</script>
-
 <template>
 
     <div class="modal">
 
         <div 
             class="modal-background"
-            @click="closeModal()"
+            @click="closeNoteModal()"
         >
 
         </div>
@@ -92,8 +89,8 @@
             }
         },
         methods: {
-            closeModal(){
-                this.$emit('closeModal')
+            closeNoteModal(){
+                this.$emit('closeNoteModal')
             },
             saveTitle(event){
                 this.properties.title = event.target.value
@@ -130,7 +127,7 @@
             
         },
         emits: [
-            'closeModal'
+            'closeNoteModal'
         ],
         mounted(){
             this.leftCategories = this.categories
@@ -139,5 +136,6 @@
 </script>
 
 <style scoped>
-    @import './Note_modal.css'
+    @import './modals.css';
+    @import './Note_modal.css';
 </style>

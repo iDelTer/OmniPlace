@@ -15,12 +15,21 @@
 			</div>
         </div>
 
-        <div class="menu-item" @click="addCategory()">
+        <!-- <div class="menu-item" @click="addCategory()">
 			<div class="menu-icon">
 				<i class="title-img bi bi-plus-circle"></i>
 			</div>
 			<div class="menu-text">
 				<span>New Category</span>
+			</div>
+        </div> -->
+
+        <div class="menu-item" @click="openCategoryModal()">
+            <div class="menu-icon">
+				<i class="title-img bi bi-gear"></i>
+			</div>
+			<div class="menu-text">
+				<span>Manage Categories</span>
 			</div>
         </div>
 
@@ -58,7 +67,7 @@
                 :properties="note"
                 :categories="categories"
                 @removeNote="removeNote(note.id)"
-                @openModal="openModal(note.id)"
+                @openModal="openNoteModal(note.id)"
             />
             </template>
         </div>
@@ -75,7 +84,7 @@
                 :properties="note"
                 :categories="categories"
                 @removeNote="removeNote(note.id)"
-                @openModal="openModal(note.id)"
+                @openModal="openNoteModal(note.id)"
             />
             </template>
         </div>
@@ -92,11 +101,19 @@
 	</div>
 
     <Note_Modal
-        v-if="options.modal.showModal"
+        v-if="options.modal.notes.showModal"
         :properties="getNote(options.modal.noteId)"
         :categories="categories"
-        @closeModal="closeModal()"
+        @closeNoteModal="closeNoteModal()"
     />
+    <Category_Modal
+        v-if="options.modal.categories.showModal"
+        :categories="categories"
+        @closeCategoryModal="closeCategoryModal()"
+        @removeCategory="removeCategory(identifier)"
+    />
+
+
 		<!-- 
             Al editar ->
 
@@ -117,7 +134,8 @@
 
 <script>
     import Note from "../components/Notes/Note.vue"
-    import Note_Modal from "../components/Modals/Note_Modal.vue";
+    import Note_Modal from "../components/Modals/Note_Modal.vue"
+    import Category_Modal from "../components/Modals/Category_Modal.vue"
 
 	export default {
         components: {
@@ -129,8 +147,13 @@
                     showPinned: true,
                     onlyPinned: false,
                     modal: {
-                        showModal: false,
-                        noteId: ''
+                        notes: {
+                            showModal: false,
+                            noteId: ''
+                        },
+                        categories: {
+                            showModal: false
+                        }
                     }
                 },
                 categories: [
@@ -156,17 +179,17 @@
         },
         methods: {
             createId() {
-                let id = gId();
-                gId.valid(id);
-                return id;
+                let id = gId()
+                gId.valid(id)
+                return id
             },
             addCategory() {
                 let obj = {
                     id: this.createId(),
                     name: "Edit Name",
                     color: "#000000"
-                };
-                this.categories.push(obj);
+                }
+                this.categories.push(obj)
             },
             addNote(){
                 let obj = {
@@ -178,19 +201,6 @@
                     showContext: false
                 }
                 this.notes.push(obj)
-            },
-            addCategory(){
-                // Crea una nueva categoría
-                // Abre una modal que muestra todas las categorías
-                let obj = {
-                    id: this.createId(),
-                    title: 'New note',
-                    content: 'Start writing this note!',
-                    categories: [],
-                    isPinned: false,
-                    showContext: false
-                }
-                this.categories.push(obj)
             },
             removeCategory(identifier){
                 let index = this.categories.findIndex(
@@ -205,18 +215,24 @@
                 this.notes.splice(index, 1);
             },
             togglePinned(){
-                this.options.showPinned = !this.options.showPinned;
+                this.options.showPinned = !this.options.showPinned
             },
-            onlyCheckeds(){
+            onlyPinned(){
                 this.options.onlyPinned = !this.options.onlyPinned
                 this.options.showPinned = !this.options.onlyPinned
             },
-            openModal(identifier){
-                this.options.modal.noteId = identifier
-                this.options.modal.showModal = true
+            openNoteModal(identifier){
+                this.options.modal.notes.noteId = identifier
+                this.options.modal.notes.showModal = true
             },
-            closeModal(){
-                this.options.modal.showModal = false
+            openCategoryModal(){
+                this.options.modal.categories.showModal = true
+            },
+            closeNoteModal(){
+                this.options.modal.notes.showModal = false
+            },
+            closeCategoryModal(){
+                this.options.modal.categories.showModal = false
             },
             loadCategoriesFromLocal() {
                 const categoriesFromLocal = localStorage.getItem("notes-categories");
@@ -260,7 +276,7 @@
         },
         mounted() {
             this.loadCategoriesFromLocal()
-            this.loadItemsFromLocal()
+            this.loadNotesFromLocal()
         }
     }
 </script>

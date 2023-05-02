@@ -1,6 +1,6 @@
 <script setup>
-	import { reactive } from "vue";
-	import { uuid4 as gId } from "uuid4";
+	import { reactive } from "vue"
+	import { uuid4 as gId } from "uuid4"
 </script>
 
 <template>
