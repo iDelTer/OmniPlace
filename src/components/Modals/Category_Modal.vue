@@ -1,5 +1,36 @@
 <script setup>
-    import { uuid4 as gId } from "uuid4"
+	import { defineProps, defineEmits } from "vue"
+	import { uuid4 as gId } from "uuid4"
+	import { storeNote } from "../../stores/note"
+
+	const store = storeNote()
+
+	const props = defineProps({
+		categories: {
+			type: Array,
+			required: true,
+		},
+	})
+
+	// const createCategory = () => {
+	// 	store.addCategory()
+	// }
+	const updateCatColor = (index, color) => {
+		store.updateCategoryColor(index, color)
+	}
+	const updateCatName = (index, name) => {
+		store.updateCategoryName(index, name)
+	}
+
+	/* Emits */
+	const emit = defineEmits(['closeCategoryModal', 'createCategory'])
+
+	const closeCategoryModal = () => {
+		emit('closeCategoryModal')
+	}
+	const createCategory = () => {
+		emit('createCategory')
+	}
 </script>
 
 <template>
@@ -12,7 +43,7 @@
 					<p>CATEGORIES</p>
 				</div>
 				<div class="modal-menu">
-					<i class="bi bi-plus-circle" @click="addCategory"></i>
+					<i class="bi bi-plus-circle" @click="createCategory()"></i>
 				</div>
 			</div>
 
@@ -31,9 +62,10 @@
 						v-model="category.name"
 						@blur="updateCatName(category.id, category.name)"
 					/>
-                    <i 
-                    class="context-img bi bi-dash-circle" 
-                    @click="removeCategory(category.id)"></i>
+					<i
+						class="context-img bi bi-dash-circle"
+						@click="removeCategory(category.id)"
+					></i>
 				</div>
 			</div>
 		</div>
@@ -42,26 +74,26 @@
 
 <script>
 	export default {
-		props: {
-			categories: {
-				type: Array,
-				required: true,
-			},
-		},
+		// props: {
+		// 	categories: {
+		// 		type: Array,
+		// 		required: true,
+		// 	},
+		// },
 		methods: {
-            createId() {
-                let id = gId()
-                gId.valid(id)
-                return id
-            },
-            addCategory() {
-                let obj = {
-                    id: this.createId(),
-                    name: "Edit Name",
-                    color: "#000000"
-                }
-                this.categories.push(obj)
-            },
+			createId() {
+				let id = gId()
+				gId.valid(id)
+				return id
+			},
+			addCategory() {
+				let obj = {
+					id: this.createId(),
+					name: "Edit Name",
+					color: "#000000",
+				}
+				this.categories.push(obj)
+			},
 			updateCatColor(id, color) {
 				let index = this.categories.findIndex((item) => item.id === id)
 				this.categories[index].color = color
@@ -73,9 +105,9 @@
 			closeCategoryModal() {
 				this.$emit("closeCategoryModal")
 			},
-            removeCategory(id){
-                this.$emit('removeCategory', id)
-            }
+			removeCategory(id) {
+				this.$emit("removeCategory", id)
+			},
 		},
 		emits: ["closeCategoryModal"],
 	}

@@ -1,7 +1,8 @@
 import { defineStore } from "pinia"
 import { uuid4 as gId } from "uuid4"
+import { watch } from 'vue'
 
-export const storeList = defineStore("list", {
+export const storeNote = defineStore("note", {
     state: () => ({
         categories: [],
         notes: [],
@@ -42,13 +43,11 @@ export const storeList = defineStore("list", {
         addCategory(){
             let obj = {
                 id: this.createId(),
-                title: 'New note',
-                content: 'Start writing this note!',
-                categories: [],
-                isPinned: false,
-                showContext: false
+                name: "Edit Name",
+                color: "#000000",
             }
             this.categories.push(obj)
+            console.log(`Se ha creado una nueva categoría ${obj.id}`)
         },
         removeCategory(identifier){
             let index = this.categories.findIndex(
@@ -56,9 +55,11 @@ export const storeList = defineStore("list", {
             )
             this.categories.splice(index, 1);
         },
-        updateCategory(index, name, color){
-            this.categories[index].name = name
+        updateCategoryColor(index, color){
             this.categories[index].color = color
+        },
+        updateCategoryName(index, name){
+            this.categories[index].name = name
         },
 
 
@@ -73,6 +74,7 @@ export const storeList = defineStore("list", {
                 showContext: false
             }
             this.notes.push(obj)
+            console.log(this.notes)
         },
         removeNote(identifier){
             let index = this.notes.findIndex(
@@ -93,6 +95,12 @@ export const storeList = defineStore("list", {
             if (NotesFromLocal) {
                 this.notes = JSON.parse(NotesFromLocal);
             }
+        },
+        saveCategories(){
+            localStorage.setItem("notes-categories", JSON.stringify(this.categories))
+        },
+        saveNotes(){
+            localStorage.setItem("notes-notes", JSON.stringify(this.notes))
         }
     }
 })

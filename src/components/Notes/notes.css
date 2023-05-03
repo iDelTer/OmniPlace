@@ -61,3 +61,23 @@
     justify-content: center;
     align-content: center;
 }
+#pinned-box{
+	position: relative;
+	margin-bottom: 50px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
+	border-bottom: 1px solid rgb(210, 210, 210);
+}
+#notpinned-box{
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
+}

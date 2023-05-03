@@ -1,102 +1,39 @@
 <script setup>
-	import { ref, watch, onMounted } from "vue"
-    import { storeToRefs } from "pinia"
-	import { storeNote } from "../stores/note"
-    import Note from "../components/Notes/Note.vue"
-    import Note_Modal from "../components/Modals/Note_Modal.vue"
-    import Category_Modal from "../components/Modals/Category_Modal.vue"
-
-	const store = storeNote()
-
-    const { categories } = storeToRefs(store)
-    const { notes } = storeToRefs(store)
-
-    onMounted(() => {
-        store.loadCategoriesFromLocal()
-        store.loadNotesFromLocal()
-    })
-
-	const options = ref({
-		showPinned: true,
-		onlyPinned: false,
-		modal: {
-			notes: {
-				showModal: false,
-				noteId: "",
-			},
-			categories: {
-				showModal: false,
-			},
-		},
-	})
-
-	const category = {
-		id: "",
-		name: "",
-		color: "",
-	}
-	const note = {
-		id: "",
-		title: "",
-		content: "",
-		categories: Array,
-		isPinned: false,
-		showContext: false,
-	}
-
-    const createNote = () => {
-        store.addNote()
-    }
-
-    /* Categories */
-    const openCategoryModal = () => {
-        options.value.modal.categories.showModal = true
-    }
-    const closeCategoryModal = () => {
-        options.value.modal.categories.showModal = false
-    }
-    const createCategory = () => {
-        store.addCategory()
-    }
-
-    /* Observar los cambios */
-    watch(
-        notes, () =>{
-            console.log('Notes ha cambiado')
-            store.saveNotes()
-        }, {
-            deep: true
-        },
-        categories, () => {
-            console.log('Categories ha cambiado')
-        }, {
-            deep:true
-        }
-    )
-
+    import { uuid4 as gId } from "uuid4"
 </script>
 
 <template>
-	<div id="notes-menu">
-		<div class="menu-item" @click="createNote()">
+
+    <div id="notes-menu">
+
+		<div class="menu-item" @click="addNote()">
 			<div class="menu-icon">
 				<i class="title-img bi bi-plus-circle"></i>
 			</div>
 			<div class="menu-text">
 				<span>New Note</span>
 			</div>
-		</div>
+        </div>
 
-		<div class="menu-item" @click="openCategoryModal()">
+        <!-- <div class="menu-item" @click="addCategory()">
 			<div class="menu-icon">
+				<i class="title-img bi bi-plus-circle"></i>
+			</div>
+			<div class="menu-text">
+				<span>New Category</span>
+			</div>
+        </div> -->
+
+        <div class="menu-item" @click="openCategoryModal()">
+            <div class="menu-icon">
 				<i class="title-img bi bi-gear"></i>
 			</div>
 			<div class="menu-text">
 				<span>Manage Categories</span>
 			</div>
-		</div>
+        </div>
 
-		<div class="menu-item" @click="togglePinned()">
+        <div class="menu-item" @click="togglePinned()">
 			<div class="menu-icon">
 				<i class="title-img bi bi-pin-angle"></i>
 			</div>
@@ -105,7 +42,7 @@
 			</div>
 		</div>
 
-		<div class="menu-item" @click="onlyPinned()">
+        <div class="menu-item" @click="onlyPinned()">
 			<div class="menu-icon">
 				<i class="title-img bi bi-pin-angle-fill"></i>
 			</div>
@@ -113,76 +50,92 @@
 				<span>Only Pins</span>
 			</div>
 		</div>
+
 	</div>
 
-	<div id="notes-box" v-if="options.showPinned">
-		<div id="pinned-box">
-			<div class="categories-title">
-				<p class="list-box-title">
-					<i class="bi bi-pin-angle-fill"></i>
-				</p>
+    <div id="notes-box" v-if="options.showPinned">
+
+        <div id="pinned-box">
+            <div class="categories-title">
+				<p class="list-box-title"><i class="bi bi-pin-angle-fill"></i></p>
 			</div>
 
-			<template v-for="note in notes">
-				<Note
-					:key="note.id"
-					v-if="note.isPinned"
-					:properties="note"
-					:categories="categories"
-					@removeNote="removeNote(note.id)"
-					@openModal="openNoteModal(note.id)"
-				/>
-			</template>
-		</div>
+            <template v-for="note in notes">
+                <Note
+                :key="note.id"
+                v-if="note.isPinned"
+                :properties="note"
+                :categories="categories"
+                @removeNote="removeNote(note.id)"
+                @openModal="openNoteModal(note.id)"
+            />
+            </template>
+        </div>
 
-		<div id="notpinned-box" v-if="!options.onlyPinned">
-			<div class="categories-title">
+        <div id="notpinned-box" v-if="!options.onlyPinned">
+            <div class="categories-title">
 				<p class="list-box-title"><i class="bi bi-pin-angle"></i></p>
 			</div>
 
-			<template v-for="note in notes">
-				<Note
-					:key="note.id"
-					v-if="!note.isPinned"
-					:properties="note"
-					:categories="categories"
-					@removeNote="removeNote(note.id)"
-					@openModal="openNoteModal(note.id)"
-				/>
-			</template>
-		</div>
+            <template v-for="note in notes">
+                <Note
+                :key="note.id"
+                v-if="!note.isPinned"
+                :properties="note"
+                :categories="categories"
+                @removeNote="removeNote(note.id)"
+                @openModal="openNoteModal(note.id)"
+            />
+            </template>
+        </div>
 	</div>
 
 	<div id="notes-box" v-else>
-		<Note
-			v-for="note in notes"
-			:properties="note"
-			:categories="categories"
-			@removeNote="removeNote(note.id)"
-			@openModal="openModal(note.id)"
-		/>
+        <Note
+            v-for="note in notes"
+            :properties="note"
+            :categories="categories"
+            @removeNote="removeNote(note.id)"
+            @openModal="openModal(note.id)"
+        />
 	</div>
 
-	<Note_Modal
-		v-if="options.modal.notes.showModal"
-		:properties="getNote(options.modal.noteId)"
-		:categories="categories"
-		@closeNoteModal="closeNoteModal()"
-	/>
-	<Category_Modal
-		v-if="options.modal.categories.showModal"
-		:categories="categories"
-		@closeCategoryModal="closeCategoryModal()"
-		@removeCategory="removeCategory(identifier)"
-        @createCategory="createCategory()"
-	/>
+    <Note_Modal
+        v-if="options.modal.notes.showModal"
+        :properties="getNote(options.modal.noteId)"
+        :categories="categories"
+        @closeNoteModal="closeNoteModal()"
+    />
+    <Category_Modal
+        v-if="options.modal.categories.showModal"
+        :categories="categories"
+        @closeCategoryModal="closeCategoryModal()"
+        @removeCategory="removeCategory(identifier)"
+    />
+
+
+		<!-- 
+            Al editar ->
+
+            div Modal
+                div menu
+                    img close
+                div title
+                    input text title
+                div text
+                    input text text
+                div categories
+                    div
+                        span category
+                    div
+                        select (show only now selected)
+        -->
 </template>
 
-<!-- <script>
+<script>
     import Note from "../components/Notes/Note.vue"
     import Note_Modal from "../components/Modals/Note_Modal.vue"
     import Category_Modal from "../components/Modals/Category_Modal.vue"
-    
 
 	export default {
         components: {
@@ -203,8 +156,12 @@
                         }
                     }
                 },
-                categories: store.categories,
-                notes: store.notes,
+                categories: [
+                    {id: this.createId(), name: 'Nombresito', color: '#ffffff'},
+                    {id: this.createId(), name: 'Nombresita', color: '#000000'},
+                    {id: this.createId(), name: 'El nombre', color: '#e3e4e5'}
+                ],
+                notes: [],
                 category: {
                     id: '',
                     name: '',
@@ -318,14 +275,12 @@
             }
         },
         mounted() {
-            // this.loadCategoriesFromLocal()
-            // this.loadNotesFromLocal()
-            this.store.loadCategoriesFromLocal()
-            this.store.loadNotesFromLocal()
+            this.loadCategoriesFromLocal()
+            this.loadNotesFromLocal()
         }
     }
-</script> -->
+</script>
 
 <style scoped>
-	@import "../components/Notes/notes.css";
+    @import '../components/Notes/notes.css'
 </style>
