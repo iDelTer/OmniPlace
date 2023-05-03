@@ -1,12 +1,12 @@
 <script setup>
-	import { ref, watch, onMounted } from "vue"
+    import { ref, watch, onMounted } from "vue"
     import { storeToRefs } from "pinia"
-	import { storeNote } from "../stores/note"
+    import { storeNote } from "../stores/note"
     import Note from "../components/Notes/Note.vue"
     import Note_Modal from "../components/Modals/Note_Modal.vue"
     import Category_Modal from "../components/Modals/Category_Modal.vue"
 
-	const store = storeNote()
+    const store = storeNote()
 
     const { categories } = storeToRefs(store)
     const { notes } = storeToRefs(store)
@@ -16,47 +16,41 @@
         store.loadNotesFromLocal()
     })
 
-	const options = ref({
-		showPinned: true,
-		onlyPinned: false,
-		modal: {
-			notes: {
-				showModal: false,
-				noteId: "",
-			},
-			categories: {
-				showModal: false,
-			},
-		},
-	})
+    const options = ref({
+        showPinned: false,
+        onlyPinned: false,
+        modal: {
+            notes: {
+                showModal: false,
+                noteId: "",
+            },
+            categories: {
+                showModal: false,
+            },
+        },
+    })
 
-	const category = {
-		id: "",
-		name: "",
-		color: "",
-	}
-	const note = {
-		id: "",
-		title: "",
-		content: "",
-		categories: Array,
-		isPinned: false,
-		showContext: false,
-	}
-
+    /* Notes */
     const createNote = () => {
-        store.addNote()
+       store.addNote()
     }
 
     /* Categories */
     const openCategoryModal = () => {
-        options.value.modal.categories.showModal = true
+       options.value.modal.categories.showModal = true
     }
     const closeCategoryModal = () => {
-        options.value.modal.categories.showModal = false
+       options.value.modal.categories.showModal = false
     }
     const createCategory = () => {
-        store.addCategory()
+       store.addCategory()
+    }
+    const togglePinned = () => {
+        options.value.showPinned = !options.value.showPinned
+    }
+    const onlyPinned = () => {
+        options.value.onlyPinned = !options.value.onlyPinned
+        options.value.showPinned = !options.value.onlyPinned
     }
 
     /* Observar los cambios */
@@ -66,14 +60,16 @@
             store.saveNotes()
         }, {
             deep: true
-        },
-        categories, () => {
-            console.log('Categories ha cambiado')
-        }, {
-            deep:true
         }
     )
-
+    watch(
+        categories, () => {
+            console.log('Categories ha cambiado')
+            store.saveCategories()
+        }, {
+            deep: true
+        }
+    )
 </script>
 
 <template>
@@ -174,66 +170,16 @@
 		:categories="categories"
 		@closeCategoryModal="closeCategoryModal()"
 		@removeCategory="removeCategory(identifier)"
-        @createCategory="createCategory()"
+		@createCategory="createCategory()"
 	/>
 </template>
 
 <!-- <script>
-    import Note from "../components/Notes/Note.vue"
-    import Note_Modal from "../components/Modals/Note_Modal.vue"
-    import Category_Modal from "../components/Modals/Category_Modal.vue"
-    
-
 	export default {
         components: {
             Note
         },
-        data(){
-            return {
-                options: {
-                    showPinned: true,
-                    onlyPinned: false,
-                    modal: {
-                        notes: {
-                            showModal: false,
-                            noteId: ''
-                        },
-                        categories: {
-                            showModal: false
-                        }
-                    }
-                },
-                categories: store.categories,
-                notes: store.notes,
-                category: {
-                    id: '',
-                    name: '',
-                    color: ''
-                },
-                note: {
-                    id: '',
-                    title: '',
-                    content: '',
-                    categories: Array,
-                    isPinned: false,
-                    showContext: false
-                }
-            }
-        },
         methods: {
-            createId() {
-                let id = gId()
-                gId.valid(id)
-                return id
-            },
-            addCategory() {
-                let obj = {
-                    id: this.createId(),
-                    name: "Edit Name",
-                    color: "#000000"
-                }
-                this.categories.push(obj)
-            },
             addNote(){
                 let obj = {
                     id: this.createId(),
@@ -257,37 +203,12 @@
                 );
                 this.notes.splice(index, 1);
             },
-            togglePinned(){
-                this.options.showPinned = !this.options.showPinned
-            },
-            onlyPinned(){
-                this.options.onlyPinned = !this.options.onlyPinned
-                this.options.showPinned = !this.options.onlyPinned
-            },
             openNoteModal(identifier){
                 this.options.modal.notes.noteId = identifier
                 this.options.modal.notes.showModal = true
             },
-            openCategoryModal(){
-                this.options.modal.categories.showModal = true
-            },
             closeNoteModal(){
                 this.options.modal.notes.showModal = false
-            },
-            closeCategoryModal(){
-                this.options.modal.categories.showModal = false
-            },
-            loadCategoriesFromLocal() {
-                const categoriesFromLocal = localStorage.getItem("notes-categories");
-                if (categoriesFromLocal) {
-                    this.categories = JSON.parse(categoriesFromLocal);
-                }
-            },
-            loadNotesFromLocal() {
-                const NotesFromLocal = localStorage.getItem("notes-note");
-                if (NotesFromLocal) {
-                    this.notes = JSON.parse(NotesFromLocal);
-                }
             },
             getNote(identifier){
                 let index = this.notes.findIndex(
@@ -295,37 +216,10 @@
                 );
                 return this.notes[index]
             }
-        },
-        watch: {
-            categories: {
-                handler: (newItems) => {
-                    localStorage.setItem("notes-categories", JSON.stringify(newItems))
-                },
-                deep: true
-            },
-            notes: {
-                deep: true,
-                handler: (newVal) => {
-                    const watch = newVal.map(({ id, title, content, categories, isPinned }) => ({
-                        id,
-                        title,
-                        content,
-                        categories,
-                        isPinned
-                    }))
-                    localStorage.setItem("notes-note", JSON.stringify(watch))
-                }
-            }
-        },
-        mounted() {
-            // this.loadCategoriesFromLocal()
-            // this.loadNotesFromLocal()
-            this.store.loadCategoriesFromLocal()
-            this.store.loadNotesFromLocal()
         }
     }
 </script> -->
 
 <style scoped>
-	@import "../components/Notes/notes.css";
+@import "../components/Notes/notes.css";
 </style>
