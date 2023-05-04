@@ -50,7 +50,7 @@
 	<div class="note">
 		<div class="note-header">
 			<div class="note-title">
-				<p class="title-text">{{ props.properties.title }}</p>
+				<p class="title-text">{{ `${props.properties.title.substring(0, 15)}...` }}</p>
 			</div>
 
 			<div class="note-menu">

@@ -62,7 +62,7 @@
 	}
 	const onlyPinned = () => {
 		options.value.onlyPinned = !options.value.onlyPinned
-		options.value.showPinned = !options.value.onlyPinned
+		options.value.showPinned = true
 	}
 	const openNoteModal = (identifier) => {
 		options.value.modal.notes.noteId = identifier
@@ -127,7 +127,7 @@
 
 		<div class="menu-item" @click="togglePinned()">
 			<div class="menu-icon">
-				<i class="title-img bi bi-pin-angle"></i>
+				<i class="title-img bi bi-arrow-down-up"></i>
 			</div>
 			<div class="menu-text">
 				<span>Toggle Pins</span>
@@ -136,7 +136,8 @@
 
 		<div class="menu-item" @click="onlyPinned()">
 			<div class="menu-icon">
-				<i class="title-img bi bi-pin-angle-fill"></i>
+				<i class="title-img bi bi-pin-angle-fill" v-if="options.onlyPinned"></i>
+				<i class="title-img bi bi-pin-angle" v-else></i>
 			</div>
 			<div class="menu-text">
 				<span>Only Pins</span>
@@ -148,7 +149,7 @@
 		<div id="pinned-box">
 			<div class="categories-title">
 				<p class="list-box-title">
-					<i class="bi bi-pin-angle-fill"></i>
+					<i class="bi bi-pin-angle-fill"> PINNEDS</i>
 				</p>
 			</div>
 
@@ -166,7 +167,7 @@
 
 		<div id="notpinned-box" v-if="!options.onlyPinned">
 			<div class="categories-title">
-				<p class="list-box-title"><i class="bi bi-pin-angle"></i></p>
+				<p class="list-box-title"><i class="bi bi-pin-angle"> NOT PINNEDS</i></p>
 			</div>
 
 			<template v-for="note in notes">
