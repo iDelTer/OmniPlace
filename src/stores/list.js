@@ -6,7 +6,8 @@ export const storeList = defineStore("list", {
         categories: [],
         items: [],
         categoryId: 0,
-        itemId: 0
+        itemId: 0,
+        identifier: ''
     }),
     getters: {
         getAllCategories: (state) => {
@@ -28,7 +29,15 @@ export const storeList = defineStore("list", {
         },
         getItemsLength: (state) => {
             return state.items.length
-        }
+        },
+        getCategoryColor: (state) => (identifier) =>{
+            const color = state.categories.filter((item) => item.id === identifier)
+            return color
+        },
+        getCategoryName: (state) => (identifier) =>{
+            const name = state.categories.filter((item) => item.id === identifier)
+            return name
+        },
     },
     actions: {
         createId() {
@@ -47,7 +56,7 @@ export const storeList = defineStore("list", {
 				isPinned: false,
 				isDragging: false
 			}
-			thiste.categories.push(obj)
+			this.categories.push(obj)
         },
 		removeCategory(identifier) {
 			let index = this.categories.findIndex(
@@ -55,10 +64,23 @@ export const storeList = defineStore("list", {
 			)
 			this.categories.splice(index, 1);
 		},
-        updateCategory(index, name, color, isPinned){
+        updateCategoryName(identifier, name){
+            let index = this.categories.findIndex(
+				(item) => item.id === identifier
+			)
             this.categories[index].name = name
+        },
+        updateCategoryColor(identifier, color){
+            let index = this.categories.findIndex(
+				(item) => item.id === identifier
+			)
             this.categories[index].color = color
-            this.categories[index].isPinned = isPinned
+        },
+        updateCategoryPin(identifier, pin){
+            let index = this.categories.findIndex(
+				(item) => item.id === identifier
+			)
+            this.categories[index].isPinned = pin
         },
 
 
@@ -75,9 +97,22 @@ export const storeList = defineStore("list", {
             let index = this.items.findIndex(item => item.id === identifier)
             this.items.splice(index, 1)
         },
-        updateItem(index, text, isChecked){
+        updateItem(identifier, text, isChecked){
+            const index = this.items.findIndex(item => item.id === identifier)
             this.items[index].text = text
             this.items[index].isChecked = isChecked
+        },
+        updateItemCategory(identifier, newCategory){
+            const index = this.items.findIndex(item => item.id === identifier)
+            this.items[index].category = newCategory
+        },
+        updateItemText(identifier, newText){
+            const index = this.items.findIndex(item => item.id === identifier)
+            this.items[index].text = newText
+        },
+        updateItemChecked(identifier, newCheck){
+            const index = this.items.findIndex(item => item.id === identifier)
+            this.items[index].isChecked = newCheck
         },
 
         /** Load data */
@@ -93,6 +128,12 @@ export const storeList = defineStore("list", {
 				this.items = JSON.parse(ItemsFromLocal);
 			}
 		},
+        saveCategories(){
+            localStorage.setItem("lists-categories", JSON.stringify(this.categories));
+        },
+        saveItems(){
+            localStorage.setItem("lists-categories", JSON.stringify(this.items));
+        },
 		cleanTrash() {
 			this.items.map((item, index) => {
 				let exists = false;

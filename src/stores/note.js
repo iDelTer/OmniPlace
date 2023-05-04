@@ -6,8 +6,9 @@ export const storeNote = defineStore("note", {
     state: () => ({
         categories: [],
         notes: [],
-        categoryId: 0,
-        noteId: 0
+        categoryId: '',
+        noteId: '',
+        identifier: ''
     }),
     getters: {
         getAllCategories: (state) => {
@@ -22,6 +23,7 @@ export const storeNote = defineStore("note", {
         },
         getNote: (state) => (noteId) => {
             const note = state.notes.filter((item) => item.id === noteId)
+            console.log(`Nota es: ${JSON.stringify(note)}`)
             return note
         },
         getCategoriesLength: (state) => {
@@ -29,9 +31,18 @@ export const storeNote = defineStore("note", {
         },
         getNotesLength: (state) => {
             return state.notes.length
-        }
+        },
+        getCategoryColor: (state) => (identifier) =>{
+            const category = state.categories.filter((item) => item.id === identifier)
+            return category
+        },
+        getCategoryName: (state) => (identifier) =>{
+            const category = state.categories.filter((item) => item.id === identifier)
+            return category
+        },
     },
     actions: {
+        /* General */
         createId() {
 			let id = gId()
 			gId.valid(id)
@@ -54,12 +65,17 @@ export const storeNote = defineStore("note", {
                 (item) => item.id === identifier
             )
             this.categories.splice(index, 1);
+            console.log(`Se ha eliminado la categoría ${identifier}`)
         },
-        updateCategoryColor(index, color){
+        updateCategoryColor(identifier, color){
+            const index = this.categories.findIndex(item => item.id === identifier)
             this.categories[index].color = color
+            console.log(`Color de la categoría cambiado a: ${this.categories[index].color}`)
         },
-        updateCategoryName(index, name){
+        updateCategoryName(identifier, name){
+            const index = this.categories.findIndex(item => item.id === identifier)
             this.categories[index].name = name
+            console.log(`Nombre de la categoría cambiado a: ${this.categories[index].name}`)
         },
 
 
@@ -74,13 +90,14 @@ export const storeNote = defineStore("note", {
                 showContext: false
             }
             this.notes.push(obj)
-            console.log(this.notes)
+            console.log(`Se ha añadido una nueva nota ${this.notes}`)
         },
         removeNote(identifier){
             let index = this.notes.findIndex(
                 (item) => item.id === identifier
             )
             this.notes.splice(index, 1);
+            console.log(`Se ha eliminado la nota: ${identifier}`)
         },
 
         /** Load data */
@@ -100,7 +117,7 @@ export const storeNote = defineStore("note", {
             localStorage.setItem("notes-categories", JSON.stringify(this.categories))
         },
         saveNotes(){
-            localStorage.setItem("notes-notes", JSON.stringify(this.notes))
+            localStorage.setItem("notes-note", JSON.stringify(this.notes))
         }
     }
 })

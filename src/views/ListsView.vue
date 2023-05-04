@@ -1,6 +1,80 @@
 <script setup>
-	import { reactive } from "vue"
-	import { uuid4 as gId } from "uuid4"
+	import { ref, watch, onMounted } from "vue"
+	import { storeToRefs } from "pinia"
+	import { storeList } from "../stores/list"
+	import Category from "../components/Lists/Category.vue"
+
+	const store = storeList()
+
+	const { categories } = storeToRefs(store)
+	const { items } = storeToRefs(store)
+
+	const showPinned = ref(false)
+	const checkedOptions = ref({
+		showCheckeds: false,
+		hideCheckeds: false,
+	})
+
+	onMounted(() => {
+		store.loadCategoriesFromLocal()
+		store.loadItemsFromLocal()
+		store.cleanTrash()
+	})
+
+	/* Categories */
+	const addCategory = () => {
+		store.addCategory()
+	}
+	const removeCategory = (identifier) => {
+		store.removeCategory(identifier)
+	}
+
+	/* Options */
+	const togglePinned = () => {
+		showPinned.value = !showPinned.value
+	}
+	const onlyCheckeds = () => {
+		checkedOptions.value.showCheckeds = !checkedOptions.value.showCheckeds
+		checkedOptions.value.hideCheckeds =
+			checkedOptions.value.hideCheckeds = false
+	}
+	const hideCheckeds = () => {
+		checkedOptions.value.hideCheckeds = !checkedOptions.value.hideCheckeds
+		checkedOptions.value.showCheckeds =
+			checkedOptions.value.showCheckeds = false
+	}
+	const draggingStarted = () => {
+		categories.map((c) => {
+			c.isDragging = true
+		})
+	}
+	const draggingFinished = () => {
+		categories.map((c) => {
+			c.isDragging = false
+		})
+	}
+
+	/* Observar los cambios */
+	watch(
+		items,
+		() => {
+			console.log("Items ha cambiado")
+			store.saveItems()
+		},
+		{
+			deep: true,
+		}
+	)
+	watch(
+		categories,
+		() => {
+			console.log("Categories ha cambiado")
+			store.saveCategories()
+		},
+		{
+			deep: true,
+		}
+	)
 </script>
 
 <template>
@@ -39,11 +113,12 @@
 		</div>
 	</div>
 
-	<div id="list-box" :style="{flexDirection: 'column'}" v-if="showPinned">
+	<div id="list-box" :style="{ flexDirection: 'column' }" v-if="showPinned">
 		<div id="pinned-box">
 			<div class="categories-title">
-				<!-- <p class="list-box-title">PINNED LISTS</p> -->
-				<p class="list-box-title"><i class="bi bi-pin-angle-fill"></i></p>
+				<p class="list-box-title">
+					<i class="bi bi-pin-angle-fill"></i>
+				</p>
 			</div>
 
 			<div class="categories-box">
@@ -64,7 +139,6 @@
 
 		<div id="notpinned-box">
 			<div class="categories-title">
-				<!-- <p class="list-box-title">NO PINNED LISTS</p> -->
 				<p class="list-box-title"><i class="bi bi-pin-angle"></i></p>
 			</div>
 			<div class="categories-box">
@@ -84,7 +158,6 @@
 		</div>
 	</div>
 
-
 	<div id="list-box" :style="{ flexDirection: 'row' }" v-else>
 		<Category
 			v-for="category in categories"
@@ -96,128 +169,7 @@
 			@draggingFinished="draggingFinished()"
 		/>
 	</div>
-
 </template>
-
-<script>
-import Category from "../components/Lists/Category.vue";
-
-export default {
-	components: {
-		Category
-	},
-	data() {
-		return {
-			items: [],
-			categories: [],
-			showPinned: false,
-			checkedOptions: {
-				showCheckeds: false,
-				hideCheckeds: false
-			},
-			category: {
-				id: "",
-				name: "",
-				color: "",
-				isPinned: false,
-				isDragging: false
-			}
-		};
-	},
-	methods: {
-		createId() {
-			let id = gId();
-			gId.valid(id);
-			return id;
-		},
-		addCategory() {
-			let obj = {
-				id: this.createId(),
-				name: "Edit Name",
-				color: "#000000",
-				isPinned: false,
-				isDragging: false
-			};
-			this.categories.push(obj);
-		},
-		removeCategory(identifier) {
-			let index = this.categories.findIndex(
-				(item) => item.id === identifier
-			);
-			this.categories.splice(index, 1);
-		},
-		togglePinned() {
-			this.showPinned = !this.showPinned;
-		},
-		onlyCheckeds(){
-			this.checkedOptions.showCheckeds = !this.checkedOptions.showCheckeds
-			this.checkedOptions.hideCheckeds = this.checkedOptions.hideCheckeds = false
-		},
-		hideCheckeds(){
-			this.checkedOptions.hideCheckeds = !this.checkedOptions.hideCheckeds
-			this.checkedOptions.showCheckeds = this.checkedOptions.showCheckeds = false
-		},
-		draggingStarted() {
-			this.categories.map((c) => {
-				c.isDragging = true;
-			});
-		},
-		draggingFinished() {
-			this.categories.map((c) => {
-				c.isDragging = false;
-			});
-		},
-		loadCategoriesFromLocal() {
-			const categoriesFromLocal = localStorage.getItem("lists-categories");
-			if (categoriesFromLocal) {
-				this.categories = JSON.parse(categoriesFromLocal);
-			}
-		},
-		loadItemsFromLocal() {
-			const ItemsFromLocal = localStorage.getItem("lists-items");
-			if (ItemsFromLocal) {
-				this.items = JSON.parse(ItemsFromLocal);
-			}
-		},
-		cleanTrash() {
-			this.items.map((item, index) => {
-				let exists = false;
-				this.categories.map((cat) => {
-					if (item.category === cat.id) {
-						exists = true;
-					}
-				});
-				if (!exists) {
-					this.items.splice(index, 1);
-				}
-			});
-		}
-	},
-	emits: [
-		
-	],
-	watch: {
-		categories: {
-			deep: true,
-			handler: (newVal) => {
-				const watch = newVal.map(({ id, name, color, isPinned, showCheckeds }) => ({
-					id,
-					name,
-					color,
-					isPinned,
-					showCheckeds
-				}));
-				localStorage.setItem("lists-categories", JSON.stringify(watch));
-			}
-		}
-	},
-	mounted() {
-		this.loadCategoriesFromLocal();
-		this.loadItemsFromLocal();
-		this.cleanTrash();
-	}
-};
-</script>
 
 <style scoped>
 	@import "../components/Lists/list.css";

@@ -1,6 +1,5 @@
 <script setup>
 	import { defineProps, defineEmits } from "vue"
-	import { uuid4 as gId } from "uuid4"
 	import { storeNote } from "../../stores/note"
 
 	const store = storeNote()
@@ -12,24 +11,24 @@
 		},
 	})
 
-	// const createCategory = () => {
-	// 	store.addCategory()
-	// }
-	const updateCatColor = (index, color) => {
-		store.updateCategoryColor(index, color)
+	const updateCatColor = (identifier, color) => {
+		store.updateCategoryColor(identifier, color)
 	}
-	const updateCatName = (index, name) => {
-		store.updateCategoryName(index, name)
+	const updateCatName = (identifier, name) => {
+		store.updateCategoryName(identifier, name)
 	}
 
 	/* Emits */
-	const emit = defineEmits(['closeCategoryModal', 'createCategory'])
+	const emit = defineEmits(["closeCategoryModal", "createCategory"])
 
 	const closeCategoryModal = () => {
-		emit('closeCategoryModal')
+		emit("closeCategoryModal")
 	}
 	const createCategory = () => {
-		emit('createCategory')
+		emit("createCategory")
+	}
+	const removeCategory = (id) => {
+		store.removeCategory(id)
 	}
 </script>
 
@@ -72,46 +71,6 @@
 	</div>
 </template>
 
-<script>
-	export default {
-		// props: {
-		// 	categories: {
-		// 		type: Array,
-		// 		required: true,
-		// 	},
-		// },
-		methods: {
-			createId() {
-				let id = gId()
-				gId.valid(id)
-				return id
-			},
-			addCategory() {
-				let obj = {
-					id: this.createId(),
-					name: "Edit Name",
-					color: "#000000",
-				}
-				this.categories.push(obj)
-			},
-			updateCatColor(id, color) {
-				let index = this.categories.findIndex((item) => item.id === id)
-				this.categories[index].color = color
-			},
-			updateCatName(id, name) {
-				let index = this.categories.findIndex((item) => item.id === id)
-				this.categories[index].name = name
-			},
-			closeCategoryModal() {
-				this.$emit("closeCategoryModal")
-			},
-			removeCategory(id) {
-				this.$emit("removeCategory", id)
-			},
-		},
-		emits: ["closeCategoryModal"],
-	}
-</script>
 <style>
 	@import "./modals.css";
 	@import "./Category_modal.css";

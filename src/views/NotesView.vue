@@ -1,75 +1,108 @@
 <script setup>
-    import { ref, watch, onMounted } from "vue"
-    import { storeToRefs } from "pinia"
-    import { storeNote } from "../stores/note"
-    import Note from "../components/Notes/Note.vue"
-    import Note_Modal from "../components/Modals/Note_Modal.vue"
-    import Category_Modal from "../components/Modals/Category_Modal.vue"
+	import { ref, watch, onMounted } from "vue"
+	import { storeToRefs } from "pinia"
+	import { storeNote } from "../stores/note"
+	import Note from "../components/Notes/Note.vue"
+	import Note_Modal from "../components/Modals/Note_Modal.vue"
+	import Category_Modal from "../components/Modals/Category_Modal.vue"
 
-    const store = storeNote()
+	const store = storeNote()
 
-    const { categories } = storeToRefs(store)
-    const { notes } = storeToRefs(store)
+	const { categories } = storeToRefs(store)
+	const { notes } = storeToRefs(store)
 
-    onMounted(() => {
-        store.loadCategoriesFromLocal()
-        store.loadNotesFromLocal()
-    })
+	onMounted(() => {
+		store.loadCategoriesFromLocal()
+		store.loadNotesFromLocal()
+	})
 
-    const options = ref({
-        showPinned: false,
-        onlyPinned: false,
-        modal: {
-            notes: {
-                showModal: false,
-                noteId: "",
-            },
-            categories: {
-                showModal: false,
-            },
-        },
-    })
+	const options = ref({
+		showPinned: false,
+		onlyPinned: false,
+		modal: {
+			notes: {
+				showModal: false,
+				noteId: "",
+			},
+			categories: {
+				showModal: false,
+			},
+		},
+	})
 
-    /* Notes */
-    const createNote = () => {
-       store.addNote()
-    }
+	/* Notes */
+	const createNote = () => {
+		store.addNote()
+        console.log(`Se va a crear una nueva nota`)
+	}
+	const removeNote = (identifier) => {
+		store.removeNote(identifier)
+        console.log(`Se va a borrar una nota`)
+	}
+	const getNote = (identifier) => {
+		console.log(`Identifier: ${identifier}`)
+		const note = store.getNote(identifier)
+        console.log(`Se ha cogido la nota ${note[0].id}`)
+		return note[0]
+	}
 
-    /* Categories */
+	/* Categories */
+	const createCategory = () => {
+		store.addCategory()
+        console.log(`Se va a crear una nueva categoría`)
+	}
+    const removeCategory = (identifier) => {
+		store.removeCategory(identifier)
+        console.log(`Se va a borrar una categoría`)
+	}
+
+	/* Options */
+	const togglePinned = () => {
+		options.value.showPinned = !options.value.showPinned
+	}
+	const onlyPinned = () => {
+		options.value.onlyPinned = !options.value.onlyPinned
+		options.value.showPinned = !options.value.onlyPinned
+	}
+	const openNoteModal = (identifier) => {
+		options.value.modal.notes.noteId = identifier
+		options.value.modal.notes.showModal = true
+		options.value.modal.categories.showModal = false
+	}
+    const closeNoteModal = () => {
+		options.value.modal.notes.showModal = false
+		options.value.modal.categories.showModal = false
+	}
     const openCategoryModal = () => {
-       options.value.modal.categories.showModal = true
-    }
-    const closeCategoryModal = () => {
-       options.value.modal.categories.showModal = false
-    }
-    const createCategory = () => {
-       store.addCategory()
-    }
-    const togglePinned = () => {
-        options.value.showPinned = !options.value.showPinned
-    }
-    const onlyPinned = () => {
-        options.value.onlyPinned = !options.value.onlyPinned
-        options.value.showPinned = !options.value.onlyPinned
-    }
+		options.value.modal.categories.showModal = true
+		options.value.modal.notes.showModal = false
+	}
+	const closeCategoryModal = () => {
+		options.value.modal.categories.showModal = false
+		options.value.modal.notes.showModal = false
+	}
 
-    /* Observar los cambios */
-    watch(
-        notes, () =>{
-            console.log('Notes ha cambiado')
-            store.saveNotes()
-        }, {
-            deep: true
-        }
-    )
-    watch(
-        categories, () => {
-            console.log('Categories ha cambiado')
-            store.saveCategories()
-        }, {
-            deep: true
-        }
-    )
+	/* Watch */
+	watch(
+		notes,
+		() => {
+			console.log("Notes ha cambiado")
+			store.saveNotes()
+		},
+		{
+			deep: true,
+		}
+	)
+	watch(
+		categories,
+		() => {
+			console.log("Categories ha cambiado")
+			store.saveCategories()
+		},
+		{
+			deep: true,
+		}
+	)
 </script>
 
 <template>
@@ -155,13 +188,13 @@
 			:properties="note"
 			:categories="categories"
 			@removeNote="removeNote(note.id)"
-			@openModal="openModal(note.id)"
+			@openModal="openNoteModal(note.id)"
 		/>
 	</div>
 
 	<Note_Modal
 		v-if="options.modal.notes.showModal"
-		:properties="getNote(options.modal.noteId)"
+		:properties="getNote(options.modal.notes.noteId)"
 		:categories="categories"
 		@closeNoteModal="closeNoteModal()"
 	/>
@@ -174,52 +207,6 @@
 	/>
 </template>
 
-<!-- <script>
-	export default {
-        components: {
-            Note
-        },
-        methods: {
-            addNote(){
-                let obj = {
-                    id: this.createId(),
-                    title: 'New note',
-                    content: 'Start writing this note!',
-                    categories: [],
-                    isPinned: false,
-                    showContext: false
-                }
-                this.notes.push(obj)
-            },
-            removeCategory(identifier){
-                let index = this.categories.findIndex(
-                    (item) => item.id === identifier
-                );
-                this.categories.splice(index, 1);
-            },
-            removeNote(identifier){
-                let index = this.notes.findIndex(
-                    (item) => item.id === identifier
-                );
-                this.notes.splice(index, 1);
-            },
-            openNoteModal(identifier){
-                this.options.modal.notes.noteId = identifier
-                this.options.modal.notes.showModal = true
-            },
-            closeNoteModal(){
-                this.options.modal.notes.showModal = false
-            },
-            getNote(identifier){
-                let index = this.notes.findIndex(
-                    (item) => item.id === identifier
-                );
-                return this.notes[index]
-            }
-        }
-    }
-</script> -->
-
 <style scoped>
-@import "../components/Notes/notes.css";
+	@import "../components/Notes/notes.css";
 </style>
