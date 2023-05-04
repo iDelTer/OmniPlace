@@ -1,114 +1,232 @@
-#list-menu{
-  position: relative;
-  padding-block: 2rem;
-  padding-inline: 2rem;
-  width: auto;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  background-color: var(--list-menu-background-color);
-}
-.menu-item{
-  position: relative;
-  padding-block: 5px;
-  padding-inline: 15px;
-  margin-left: 20px;
-  border-radius: 20px;
-  width: auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  /* color: red; */
-  color: var(--antitext-color);
-  background-color: var(--antibackground-color);
-  font-weight: bolder;
-  /* border: 4px solid var(--antitext-color); */
-  transition: 0.5s;
-}
-.menu-item:hover{
-  color: var(--text-color);
-  background-color: var(--background-color);
-  border-color: rgb(224, 4, 4);
-  transition: 0.5s;
-  cursor: pointer;
-}
-.menu-item div{
-  position: relative;
-  width: auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  height: 100%;
-}
-.menu-text{
-  padding-left: 5px;
-  padding-right: 10px;
+@media screen and (min-width: 760px){
+  #list-menu{
+    position: relative;
+    padding-block: 2rem;
+    padding-inline: 2rem;
+    width: auto;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    background-color: var(--list-menu-background-color);
+  }
+  .menu-item{
+    position: relative;
+    padding-block: 5px;
+    padding-inline: 15px;
+    margin-left: 20px;
+    border-radius: 20px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    /* color: red; */
+    color: var(--antitext-color);
+    background-color: var(--antibackground-color);
+    font-weight: bolder;
+    /* border: 4px solid var(--antitext-color); */
+    transition: 0.5s;
+  }
+  .menu-item:hover{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-color: rgb(224, 4, 4);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .menu-item div{
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 100%;
+  }
+  .menu-text{
+    padding-left: 5px;
+    padding-right: 10px;
+  }
+  
+  
+  #list-box{
+    position: relative;
+    width: auto;
+    min-height: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    padding: 2rem;
+    gap: 4rem;
+  }
+  #pinned-box{
+    position: relative;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    border-bottom: 1px solid rgb(210, 210, 210);
+  }
+  #notpinned-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+  }
+  .categories-title{
+    position: relative;
+    margin-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+  }
+  .categories-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+  }
+  .list-box-title{
+    padding-block: 5px;
+    padding-inline: 20px;
+    text-align: left;
+    font-size: 32px;
+    background-color: var(--antibackground-color);
+    color: var(--antitext-color);
+    border: 1px solid black;
+    border-radius: 5px;
+  }
 }
 
-
-#list-box{
-  position: relative;
-  width: auto;
-  min-height: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-  padding: 2rem;
-}
-#pinned-box{
-  position: relative;
-  margin-bottom: 50px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-  border-bottom: 1px solid rgb(210, 210, 210);
-}
-#notpinned-box{
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-}
-.categories-title{
-  position: relative;
-  margin-bottom: 25px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-}
-.categories-box{
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-}
-.list-box-title{
-  padding-block: 5px;
-  padding-inline: 20px;
-  text-align: left;
-  font-size: 32px;
-  background-color: var(--antibackground-color);
-  color: var(--antitext-color);
-  border: 1px solid black;
-  border-radius: 5px;
+@media screen and (max-width: 760px){
+  #list-menu {
+		position: relative;
+		padding-block: 2rem;
+		padding-inline: 2rem;
+		width: auto;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+		gap: 10px;
+		background-color: var(--list-menu-background-color);
+	}
+	.menu-item {
+		position: relative;
+		padding-block: 5px;
+		padding-inline: 15px;
+		margin-left: 20px;
+		border-radius: 20px;
+		width: fit-content;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: center;
+		color: var(--antitext-color);
+		background-color: var(--antibackground-color);
+		font-weight: bolder;
+		transition: 0.5s;
+	}
+  .menu-item:hover{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-color: rgb(224, 4, 4);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .menu-item div{
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 100%;
+  }
+  .menu-text{
+    padding-left: 5px;
+    padding-right: 10px;
+  }
+  
+  
+  #list-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  #pinned-box{
+    position: relative;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    border-bottom: 1px solid rgb(210, 210, 210);
+  }
+  #notpinned-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+  .categories-title{
+    position: relative;
+    margin-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+  }
+  .categories-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+  .list-box-title{
+    padding-block: 5px;
+    padding-inline: 20px;
+    text-align: left;
+    font-size: 32px;
+    background-color: var(--antibackground-color);
+    color: var(--antitext-color);
+    border: 1px solid black;
+    border-radius: 5px;
+  }
 }

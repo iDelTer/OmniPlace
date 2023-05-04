@@ -21,7 +21,7 @@ import { RouterLink } from 'vue-router'
 				</RouterLink>
 			</p>
 		</div>
-		<div class="nav-apps nav-icons">
+		<div class="nav-apps">
 			<div class="apps-icon">
 				<RouterLink to="/notes">
 					<i class="nav-icon bi bi-book"></i>
@@ -35,7 +35,7 @@ import { RouterLink } from 'vue-router'
 				</RouterLink>
 			</div>
 		</div>
-		<div class="nav-settings nav-icons">
+		<div class="nav-settings">
 			<div class="settings-icon">
 				<i class="nav-icon bi bi-gear"></i>
 			</div>

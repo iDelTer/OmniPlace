@@ -1,83 +1,171 @@
-#notes-menu {
-	position: relative;
-	padding-block: 2rem;
-	padding-inline: 2rem;
-	width: auto;
-	height: 50px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: center;
-	justify-content: center;
-	background-color: var(--list-menu-background-color);
-}
-.menu-item {
-	position: relative;
-	padding-block: 5px;
-	padding-inline: 15px;
-	margin-left: 20px;
-	border-radius: 20px;
-	width: auto;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: center;
-	/* color: red; */
-	color: var(--antitext-color);
-	background-color: var(--antibackground-color);
-	font-weight: bolder;
-	/* border: 4px solid var(--antitext-color); */
-	transition: 0.5s;
-}
-.menu-item:hover {
-	color: var(--text-color);
-	background-color: var(--background-color);
-	border-color: rgb(224, 4, 4);
-	transition: 0.5s;
-	cursor: pointer;
-}
-.menu-item div {
-	position: relative;
-	width: auto;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: center;
-	height: 100%;
-}
-.menu-text {
-	padding-left: 5px;
-	padding-right: 10px;
+@media screen and (min-width: 760px){
+	#notes-menu {
+		position: relative;
+		padding-block: 2rem;
+		padding-inline: 2rem;
+		width: auto;
+		height: 50px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+		background-color: var(--list-menu-background-color);
+	}
+	.menu-item {
+		position: relative;
+		padding-block: 5px;
+		padding-inline: 15px;
+		margin-left: 20px;
+		border-radius: 20px;
+		width: auto;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: center;
+		/* color: red; */
+		color: var(--antitext-color);
+		background-color: var(--antibackground-color);
+		font-weight: bolder;
+		/* border: 4px solid var(--antitext-color); */
+		transition: 0.5s;
+	}
+	.menu-item:hover {
+		color: var(--text-color);
+		background-color: var(--background-color);
+		border-color: rgb(224, 4, 4);
+		transition: 0.5s;
+		cursor: pointer;
+	}
+	.menu-item div {
+		position: relative;
+		width: auto;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: center;
+		height: 100%;
+	}
+	.menu-text {
+		padding-left: 5px;
+		padding-right: 10px;
+	}
+	
+	#notes-box{
+		position: relative;
+		padding-block: 2rem;
+		padding-inline: 1rem;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: center;
+	}
+	#pinned-box{
+		position: relative;
+		margin-bottom: 50px;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: flex-start;
+		border-bottom: 1px solid rgb(210, 210, 210);
+	}
+	#notpinned-box{
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: flex-start;
+	}
 }
 
-#notes-box{
-    position: relative;
-	padding-block: 2rem;
-	padding-inline: 1rem;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-}
-#pinned-box{
-	position: relative;
-	margin-bottom: 50px;
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-content: flex-start;
-	border-bottom: 1px solid rgb(210, 210, 210);
-}
-#notpinned-box{
-	position: relative;
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-content: flex-start;
+@media screen and (max-width: 760px){
+	#notes-menu {
+		position: relative;
+		padding-block: 2rem;
+		padding-inline: 2rem;
+		width: auto;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+		gap: 10px;
+		background-color: var(--list-menu-background-color);
+	}
+	.menu-item {
+		position: relative;
+		padding-block: 5px;
+		padding-inline: 15px;
+		margin-left: 20px;
+		border-radius: 20px;
+		width: auto;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: center;
+		color: var(--antitext-color);
+		background-color: var(--antibackground-color);
+		font-weight: bolder;
+		transition: 0.5s;
+	}
+	.menu-item:hover {
+		color: var(--text-color);
+		background-color: var(--background-color);
+		border-color: rgb(224, 4, 4);
+		transition: 0.5s;
+		cursor: pointer;
+	}
+	.menu-item div{
+		position: relative;
+		width: auto;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: center;
+		height: 100%;
+	}
+	.menu-text {
+		padding-left: 5px;
+		padding-right: 10px;
+	}
+	
+	#notes-box{
+		position: relative;
+		padding-block: 2rem;
+		padding-inline: 1rem;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: center;
+	}
+	#pinned-box{
+		position: relative;
+		margin-bottom: 50px;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: flex-start;
+		border-bottom: 1px solid rgb(210, 210, 210);
+	}
+	#notpinned-box{
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-content: flex-start;
+	}
 }

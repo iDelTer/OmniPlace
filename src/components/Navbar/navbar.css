@@ -1,75 +1,160 @@
-.navbar{
-    position: relative;
-    padding-inline: 5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: center;
-    width: 100%;
-    height: 75px;
-    background-color: var(--dark-navbar-background-color);
-    border-bottom: 1px solid rgb(228, 228, 228);
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
-}
-.navbar div{
-    height: 100%;
+@media screen and (min-width: 650px){
+    .navbar{
+        position: relative;
+        padding-inline: 5rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: center;
+        width: 100vw;
+        height: 75px;
+        background-color: var(--dark-navbar-background-color);
+        border-bottom: 1px solid rgb(228, 228, 228);
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+    }
+    .navbar div{
+        height: 100%;
+    }
+    
+    .nav-logo{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-start;
+        width: auto;
+    }
+    .nav-logo p{
+        padding-block: 5px;
+        padding-inline: 15px;
+        border-radius: 20px;
+        background: rgb(139,99,177);
+        background: linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
+        background: -webkit-linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
+        background: -moz-linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
+        font-weight: bolder;
+        color: white;
+    }
+    
+    .nav-apps{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 4rem;
+    }
+    .apps-icon{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    .nav-settings{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 1rem;
+    }
+    .settings-icon{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+    }
 }
 
-
-.nav-logo{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: flex-start;
-    width: 33%;
-}
-.nav-logo p{
-    padding-block: 5px;
-    padding-inline: 15px;
-    border-radius: 20px;
-    background: rgb(139,99,177);
-    background: linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
-    background: -webkit-linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
-    background: -moz-linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
-    font-weight: bolder;
-    color: white;
-}
-
-.nav-icons{
-    position: relative;
-    width: 33%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-}
-.nav-icons div{
-    position: relative;
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-}
-.nav-icons i{
-    margin-left: 30px;
-}
-.apps-icon span{
-    margin-left: 5px;
-}
-
-.nav-settings{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-content: center;
-    width: 33%;
+@media screen and (max-width: 650px){
+    .navbar{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        width: 100%;
+        height: auto;
+        background-color: var(--dark-navbar-background-color);
+        border-bottom: 1px solid rgb(228, 228, 228);
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+    }
+    .navbar div{
+        height: 100%;
+    }
+    
+    .nav-logo{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        width: auto;
+        background-color: cyan;
+    }
+    .nav-logo p{
+        padding-block: 5px;
+        padding-inline: 15px;
+        border-radius: 20px;
+        background: rgb(139,99,177);
+        background: linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
+        background: -webkit-linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
+        background: -moz-linear-gradient(90deg,rgb(139,99,177) 0%, rgb(97,97,97) 80%);
+        font-weight: bolder;
+        color: white;
+    }
+    
+    .apps-icon{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        background-color: pink;
+    }
+    .nav-settings{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 1rem;
+    }
+    
+    .nav-settings{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        width: auto;
+    }
+    .settings-icon{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        width: auto;
+    }
 }

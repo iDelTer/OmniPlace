@@ -1,126 +1,246 @@
-.note{
-    position: relative;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 50px;
-    padding: 0.5rem;
-    min-width: 325px;
-    max-width: 325px;
-    min-height: 200px;
-    max-height: 700px;
-    border-radius: 10px;
-    background-color: var(--list-menu-background-color);
-    color: var(--text-color);
-    border: 1px solid transparent;
-}
-.note:hover{
-    border-color: var(--antibackground-color)
+@media screen and (min-width: 350px){
+    .note{
+        position: relative;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 50px;
+        padding: 0.5rem;
+        min-width: 325px;
+        max-width: 325px;
+        min-height: 200px;
+        max-height: 700px;
+        border-radius: 10px;
+        background-color: var(--list-menu-background-color);
+        color: var(--text-color);
+        border: 1px solid transparent;
+    }
+    .note:hover{
+        border-color: var(--antibackground-color)
+    }
+    
+    .note-header{
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: center;
+    }
+    .note-title{
+        position: relative;
+        padding-inline: 1rem;
+        width: 75%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        padding-block: 5px;
+    }
+    .note-menu{
+        position: relative;
+        visibility: hidden;
+        padding-inline: 5px;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+    .note:hover > .note-header .note-menu{
+        visibility: visible;
+    }
+    .note-menu-item{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        margin-left: 10px;
+    }
+    .title-text{
+        text-align: left;
+    }
+    
+    .note-content{
+        position: relative;
+        padding-inline: 1rem;
+        min-height: 200px;
+        max-height: 500px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .note-categories{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        overflow-x: auto;
+        width: 100%;
+        padding-block: 5px;
+    }
+    .note-category{
+        margin-right: 5px;
+        padding-block: 2px;
+        padding-inline: 10px;
+        border: 2px solid transparent;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+    
+    .note-context{
+        position: absolute;
+        padding: 1rem;
+        border-radius: 5px;
+        top: 45px;
+        right: 0;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-end;
+        background-color: var(--background-color)
+    }
+    .context-item{
+        width: 100%;
+    }
+    .context-item:hover{
+        cursor: pointer;
+    }
+    .context-text{
+        margin-left: 5px;
+    }
+    
+    .note-menu-item i:hover{
+        cursor: pointer;
+    }
 }
 
-
-.note-header{
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: center;
-}
-.note-title{
-    position: relative;
-    padding-inline: 1rem;
-    width: 75%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    padding-block: 5px;
-}
-.note-menu{
-    position: relative;
-    visibility: hidden;
-    padding-inline: 5px;
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: center;
-}
-.note:hover > .note-header .note-menu{
-    visibility: visible;
-}
-.note-menu-item{
-    position: relative;
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    margin-left: 10px;
-}
-.title-text{
-    text-align: left;
-}
-
-
-.note-content{
-    position: relative;
-    padding-inline: 1rem;
-    min-height: 200px;
-    max-height: 500px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-
-.note-categories{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    overflow-x: auto;
-    width: 100%;
-    padding-block: 5px;
-}
-.note-category{
-    margin-right: 5px;
-    padding-block: 2px;
-    padding-inline: 10px;
-    border: 2px solid transparent;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-
-.note-context{
-    position: absolute;
-    padding: 1rem;
-    border-radius: 5px;
-    top: 45px;
-    right: 0;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: flex-end;
-    background-color: var(--background-color)
-}
-.context-item{
-    width: 100%;
-}
-.context-item:hover{
-    cursor: pointer;
-}
-.context-text{
-    margin-left: 5px;
-}
-
-.note-menu-item i:hover{
-    cursor: pointer;
+@media screen and (max-width: 350px){
+    .note{
+        position: relative;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 50px;
+        padding: 0.5rem;
+        width: 90%;
+        border-radius: 10px;
+        background-color: var(--list-menu-background-color);
+        color: var(--text-color);
+        border: 1px solid transparent;
+    }
+    .note:hover{
+        border-color: var(--antibackground-color)
+    }
+    
+    .note-header{
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: center;
+    }
+    .note-title{
+        position: relative;
+        padding-inline: 1rem;
+        width: 75%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        padding-block: 5px;
+    }
+    .note-menu{
+        position: relative;
+        visibility: hidden;
+        padding-inline: 5px;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+    .note:hover > .note-header .note-menu{
+        visibility: visible;
+    }
+    .note-menu-item{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        margin-left: 10px;
+    }
+    .title-text{
+        text-align: left;
+    }
+    
+    .note-content{
+        position: relative;
+        padding-inline: 1rem;
+        min-height: 200px;
+        max-height: 500px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .note-categories{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        overflow-x: auto;
+        width: 100%;
+        padding-block: 5px;
+    }
+    .note-category{
+        margin-right: 5px;
+        padding-block: 2px;
+        padding-inline: 10px;
+        border: 2px solid transparent;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+    
+    .note-context{
+        position: absolute;
+        padding: 1rem;
+        border-radius: 5px;
+        top: 45px;
+        right: 0;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-end;
+        background-color: var(--background-color)
+    }
+    .context-item{
+        width: 100%;
+    }
+    .context-item:hover{
+        cursor: pointer;
+    }
+    .context-text{
+        margin-left: 5px;
+    }
+    
+    .note-menu-item i:hover{
+        cursor: pointer;
+    }
 }
