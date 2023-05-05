@@ -1,14 +1,14 @@
 # Languages
 [English](#English)  
-    [OmniPlace](#omniplace)
-    [Required Programms](#required-programms)
-    [Installation](#installation)
-    [Running](#running)
+&emsp;[OmniPlace](#omniplace)
+&emsp;[Required Programms](#required-programms)
+&emsp;[Installation](#installation)
+&emsp;[Running](#running)
 [Español](#Español)  
-    [OmniPlace](#omniplace-1)
-    [Required Programms](#programas-necesarios)
-    [Installation](#instalación)
-    [Running](#ejecución)
+&emsp;[OmniPlace](#omniplace-1)
+&emsp;[Required Programms](#programas-necesarios)
+&emsp;[Installation](#instalación)
+&emsp;[Running](#ejecución)
 
 # English
 ## OmniPlace
