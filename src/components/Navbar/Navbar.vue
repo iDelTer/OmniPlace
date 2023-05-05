@@ -3,15 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-	<!--
-		Iconos para el theme change
-			Sol
-				- https://icons.getbootstrap.com/icons/cloud-sun/
-				- https://icons.getbootstrap.com/icons/cloud-sun-fill/
-			Luna
-				- https://icons.getbootstrap.com/icons/cloud-moon/
-				- https://icons.getbootstrap.com/icons/cloud-moon-fill/
-	-->
+
 	<div class="navbar">
 		<div class="nav-logo">
 			<p>

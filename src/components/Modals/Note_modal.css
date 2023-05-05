@@ -29,8 +29,14 @@
     width: auto;
     display: flex;
     flex-direction: row;
-    height: 80%;
-    /* background-color: red; */
+    min-height: 70%;
+    height: auto;
+}
+textarea{
+    border: 1px solid var(--list-menu-background-color);
+}
+textarea:focus{
+    border-color: cyan;
 }
 .modal-content textarea{
     padding: 1rem;
@@ -51,9 +57,9 @@
     width: auto;
     display: flex;
     flex-direction: column;
-    height: 20%;
+    justify-content: flex-end;
+    height: 100%;
     display: flex;
-    /* background-color: blue; */
 }
 .menu-categories{
     display: flex;
@@ -73,6 +79,7 @@
     border: 2px solid transparent;
     font-weight: bold;
     border-radius: 20px;
+    font-size: 14px;
 }
 .selected-text{
     margin-right: 5px;

@@ -59,6 +59,16 @@
         align-content: center;
         justify-content: center;
     }
+    .apps-icon a{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
     .nav-settings{
         position: relative;
         width: auto;
@@ -128,6 +138,16 @@
         align-content: center;
         justify-content: center;
         background-color: pink;
+    }
+    .apps-icon a{
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 0.5rem;
     }
     .nav-settings{
         position: relative;
