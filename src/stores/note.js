@@ -103,14 +103,18 @@ export const storeNote = defineStore("note", {
         /** Load data */
         loadCategoriesFromLocal() {
             const categoriesFromLocal = localStorage.getItem("notes-categories");
-            if (categoriesFromLocal) {
+            if (categoriesFromLocal && JSON.parse(categoriesFromLocal).length > 0) {
                 this.categories = JSON.parse(categoriesFromLocal);
+            }else{
+                this.addCategory()
             }
         },
         loadNotesFromLocal() {
             const NotesFromLocal = localStorage.getItem("notes-note");
-            if (NotesFromLocal) {
-                this.notes = JSON.parse(NotesFromLocal);
+            if (NotesFromLocal && JSON.parse(NotesFromLocal).length > 0) {
+                this.notes = JSON.parse(NotesFromLocal)
+            }else{
+                this.addNote()
             }
         },
         saveCategories(){

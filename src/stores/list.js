@@ -118,9 +118,11 @@ export const storeList = defineStore("list", {
         /** Load data */
         loadCategoriesFromLocal() {
 			const categoriesFromLocal = localStorage.getItem("lists-categories");
-			if (categoriesFromLocal) {
+			if (categoriesFromLocal && JSON.parse(categoriesFromLocal).length > 0) {
 				this.categories = JSON.parse(categoriesFromLocal);
-			}
+			}else{
+                this.addCategory()
+            }
 		},
 		loadItemsFromLocal() {
 			const ItemsFromLocal = localStorage.getItem("lists-items");

@@ -33,7 +33,7 @@
 </script>
 
 <template>
-	<div class="modal">
+	<div class="modal" @keydown.esc="closeCategoryModal()">
 		<div class="modal-background" @click="closeCategoryModal()"></div>
 
 		<div class="modal-container">
@@ -67,6 +67,10 @@
 					></i>
 				</div>
 			</div>
+
+			<div class="close-super-button">
+                <i class="super-button bi bi-x-lg" @click="closeCategoryModal()"></i>
+            </div>
 		</div>
 	</div>
 </template>

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="modal">
+    <div class="modal" @keydown.esc="closeNoteModal()">
 
         <div 
             class="modal-background"
@@ -52,12 +52,10 @@
 
                 </div>
 
-                <div class="menu-context">
-                    
-                    <!--Agregar borrar, copiar etc-->
+            </div>
 
-                </div>
-
+            <div class="close-super-button">
+                <i class="super-button bi bi-x-lg" @click="closeNoteModal()"></i>
             </div>
 
         </div>

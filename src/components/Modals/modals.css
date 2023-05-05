@@ -15,6 +15,18 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.8)
     }
+    .close-super-button{
+        position: absolute;
+        top: 0.25rem;
+        right: 1rem;
+    }
+    .super-button{
+        font-size: 24px;
+        color: white;
+    }
+    .supper-button:hover{
+        cursor: pointer;
+    }
     .modal-container{
         position: absolute;
         top: 5%;
@@ -46,6 +58,18 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.8)
+    }
+    .close-super-button{
+        position: absolute;
+        top: 0;
+        right: 1rem;
+    }
+    .super-button{
+        font-size: 24px;
+        color: white;
+    }
+    .close-super-button:hover{
+        cursor: pointer;
     }
     .modal-container{
         position: absolute;
