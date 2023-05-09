@@ -134,7 +134,7 @@ export const storeList = defineStore("list", {
             localStorage.setItem("lists-categories", JSON.stringify(this.categories));
         },
         saveItems(){
-            localStorage.setItem("lists-categories", JSON.stringify(this.items));
+            localStorage.setItem("lists-items", JSON.stringify(this.items));
         },
 		cleanTrash() {
 			this.items.map((item, index) => {

@@ -43,13 +43,12 @@
 	/* Options */
 	const dragStartHandler = (item, event) => {
 		event.dataTransfer.setData("item", JSON.stringify(item))
-		this.$emit("draggingStarted")
+		emit("draggingStarted")
 	}
 	const dropHandler = (event) => {
 		const item = JSON.parse(event.dataTransfer.getData("item"))
-		this.items[index].category = props.propiedad.id
-		store.updateItemCategory(item, props.propiedad.id)
-		this.$emit("draggingFinished")
+		store.updateItemCategory(item.id, props.propiedad.id)
+		emit("draggingFinished")
 	}
 	const keyManagement = (eKey, eTxt) => {
 		if (eKey.key === "Enter") {

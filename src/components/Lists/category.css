@@ -9,7 +9,7 @@
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
-        align-content: center;
+        align-content: flex-start;
         border-radius: 5px;
     }
     .category-title{
@@ -90,8 +90,8 @@
     
     .items-container{
         position: relative;
-        min-height: 60px;
         width: 100%;
+        min-height: 60px;
         height: auto;
     }
     .item{

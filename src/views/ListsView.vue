@@ -12,7 +12,7 @@
 	const showPinned = ref(false)
 	const checkedOptions = ref({
 		showCheckeds: false,
-		hideCheckeds: false,
+		hideCheckeds: false
 	})
 
 	onMounted(() => {
@@ -35,21 +35,19 @@
 	}
 	const onlyCheckeds = () => {
 		checkedOptions.value.showCheckeds = !checkedOptions.value.showCheckeds
-		checkedOptions.value.hideCheckeds =
-			checkedOptions.value.hideCheckeds = false
+		checkedOptions.value.hideCheckeds = false
 	}
 	const hideCheckeds = () => {
 		checkedOptions.value.hideCheckeds = !checkedOptions.value.hideCheckeds
-		checkedOptions.value.showCheckeds =
-			checkedOptions.value.showCheckeds = false
+		checkedOptions.value.showCheckeds = false
 	}
 	const draggingStarted = () => {
-		categories.map((c) => {
+		categories.value.map((c) => {
 			c.isDragging = true
 		})
 	}
 	const draggingFinished = () => {
-		categories.map((c) => {
+		categories.value.map((c) => {
 			c.isDragging = false
 		})
 	}
