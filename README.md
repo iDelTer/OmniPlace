@@ -12,7 +12,7 @@
 
 # English
 ## OmniPlace
-OmniPlace is an App where you can write Notes, create Lists...
+OmniPlace is an App where you can write Notes, create Lists... It saves the data in the localstorage. You will keep all the information you make as long as you use the same browser and you don't remove the cache from it.
 
 ## Required Programms
 [Git](https://git-scm.com/downloads)       
@@ -30,15 +30,19 @@ To run the project first you need to install all the packages, so run the next c
 ```
 npm install
 ```
-Then, run the project with the code
+Then, run the project as development with the code
 ```
 npm run dev
 ```
+If you'd like to deploy it, exectue next command
+```
+npm run build
+```
+It will create a folder called "Build". Those are the files to be deployed.
 
 # Español
 ## OmniPlace
-OmniPlace es una App donde puedes escribir Notas, crear Listas...
-
+OmniPlace es una App donde puedes escribir Notas, crear Listas... Guarda la información en el Localstorage. Mantendrás toda la información mientras uses el mismo navegador y no borres el caché.
 ## Programas Necesarios
 [Git](https://git-scm.com/downloads)
 [Node](https://nodejs.org/en)
@@ -55,7 +59,12 @@ Para ejecutar el proyecto primero necesitas instalar todos los paquetes, escribe
 ```
 npm install
 ```
-Después, ejecuta el siguiente código para abrir la aplicación
+Después, ejecuta el siguiente código para abrir la aplicación en modo desarrollo
 ```
 npm run dev
 ```
+Si quisieras obtener el proyecto para despliegue, ejecuta el siguiente comando
+```
+npm run build
+```
+Se creará una carpeta llamada "Build". Esos archivos son los que debes publicar.
