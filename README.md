@@ -6,9 +6,9 @@
 &emsp;[Running](#running)        
 [Español](#Español)       
 &emsp;[OmniPlace](#omniplace-1)      
-&emsp;[Required Programms](#programas-necesarios)      
-&emsp;[Installation](#instalación)      
-&emsp;[Running](#ejecución)       
+&emsp;[Programas necesarios](#programas-necesarios)      
+&emsp;[Instalación](#instalación)      
+&emsp;[Ejecución](#ejecución)       
 
 # English
 ## OmniPlace
